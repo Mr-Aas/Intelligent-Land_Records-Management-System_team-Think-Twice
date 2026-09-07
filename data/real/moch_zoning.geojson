@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "name": "mock_zoning",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4326" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "zone_id": "Z-001",
+        "zone_type": "Dense Urban"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.69, 28.97],
+            [77.71, 28.97],
+            [77.71, 28.99],
+            [77.69, 28.99],
+            [77.69, 28.97]
+          ]
+        ]
+      }
+    }
+  ]
+}

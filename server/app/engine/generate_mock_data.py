@@ -53,18 +53,30 @@ def create_mock_data(output_dir: str = "data/synthetic"):
         "owner": ["Ram Kumar", "Shyam Singh"]
     }, geometry=[leg_poly_1, leg_poly_2], crs="EPSG:4326")
     
+    # 4. Create Priority 1 Anchor Data (GNSS/NAKSHA)
+    # The absolute truth. Notice it is slightly different from legacy, and matches AI.
+    anchor_poly_1 = Polygon([
+        (lon, lat), (lon+0.001, lat), 
+        (lon+0.001, lat+0.001), (lon, lat+0.001)
+    ])
+    gdf_anchor = gpd.GeoDataFrame({
+        "bhu_aadhar_ulpin": ["UP-12345678901234"]
+    }, geometry=[anchor_poly_1], crs="EPSG:4326")
+    
     # Export to GeoJSON
     zoning_path = os.path.join(output_dir, "mock_zoning.geojson")
     ai_path = os.path.join(output_dir, "mock_ai_extracted.geojson")
     legacy_path = os.path.join(output_dir, "mock_legacy_cadastral.geojson")
+    anchor_path = os.path.join(output_dir, "mock_anchor.geojson")
     
     gdf_zoning.to_file(zoning_path, driver="GeoJSON")
     gdf_ai.to_file(ai_path, driver="GeoJSON")
     gdf_legacy.to_file(legacy_path, driver="GeoJSON")
+    gdf_anchor.to_file(anchor_path, driver="GeoJSON")
     
     print(f"Generated synthetic test data in {output_dir}")
 
 if __name__ == "__main__":
     import os
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data', 'synthetic'))
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data', 'synthetic_v2'))
     create_mock_data(base_dir)
