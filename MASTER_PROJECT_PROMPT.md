@@ -1,4 +1,12 @@
-# MASTER BUILD BRIEF
+# SUPERSEDED
+
+This file is **not** the implementation specification.
+
+Use [`CODING_AGENT_MASTER_PROMPT.md`](CODING_AGENT_MASTER_PROMPT.md) (copied from the current `prompt.md`). Do not implement GNSS star-topology, ULPIN traffic-light snapping, or SAM/YOLOv8 as the live pipeline.
+
+The historical brief below is retained only as archive.
+
+<!-- # MASTER BUILD BRIEF
 ## Project: AI-Enabled Geospatial Integration Platform for Urban Land Record Management
 ### Smart India Hackathon 2026 — Problem Statement No. 2013
 
@@ -199,4 +207,4 @@ Airflow DAG wiring the pipeline stages together; Docker containerization; AWS Fr
 
 ## 12. KICKOFF INSTRUCTION
 
-Start with **Phase 0 only**. Before writing any files, ask me any clarifying questions you have about this brief, then propose a repository structure and wait for my approval before generating anything.
+Start with **Phase 0 only**. Before writing any files, ask me any clarifying questions you have about this brief, then propose a repository structure and wait for my approval before generating anything. -->
