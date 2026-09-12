@@ -1,0 +1,11 @@
+record_id,parcel_id,tehsil,land_area_sqm,owner_name,purpose_of_use,record_status,updated_at,khasra_no,khata_no,cadastral_owner
+DLR-102,PAR-102,Tehsil-Alpha,89600.0,Owner_A,residential,active,2026-08-10,KHS-102,KHT-102,Owner_A
+DLR-103,PAR-103,Tehsil-Alpha,70000.0,Owner_B,residential,active,2026-08-10,KHS-103,KHT-103,Owner_B
+DLR-104,PAR-104,Tehsil-Alpha,85400.0,Owner_C,mixed_use,active,2026-08-10,KHS-104,KHT-104,Owner_C
+DLR-105,PAR-105,Tehsil-Beta,82600.0,Owner_D,residential,active,2026-08-10,KHS-105,KHT-105,Owner_D
+DLR-106,PAR-106,Tehsil-Beta,86800.0,Owner_E_Cadastral,industrial,active,2026-08-10,KHS-106,KHT-106,Owner_E
+DLR-107,PAR-107,Tehsil-Alpha,69600.0,Owner_F,residential,active,2026-08-10,KHS-107,KHT-107,Owner_F
+DLR-108,PAR-108,Tehsil-Alpha,46400.0,Owner_G,residential,active,2026-08-10,KHS-108,KHT-108,Owner_G
+DLR-109,PAR-109,Tehsil-Beta,75400.0,Owner_H,residential,active,2026-08-10,KHS-109,KHT-109,Owner_H
+DLR-110,PAR-110,Tehsil-Beta,86500.0,Owner_I,commercial,active,2026-08-10,KHS-110,KHT-110,Owner_I
+DLR-111,PAR-111,Tehsil-Beta,87000.0,Owner_J,residential,active,2026-08-10,KHS-111,KHT-111,Owner_J

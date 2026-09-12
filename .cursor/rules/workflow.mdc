@@ -1,0 +1,40 @@
+---
+description: Sequential pipeline, statuses, and what may enter Stage 4
+alwaysApply: true
+---
+
+# Live pipeline (sequential)
+
+1. Raster GeoTIFF → Rasterio tiles → YOLOv11-seg adapter (or isolated mock with the same contract) → `ai_extracted` GeoJSON (pixel coords via raster transform).
+2. Municipal matching: **any spatial intersection** with a municipal building counts, including edge-only / boundary-touch overlap. Not full containment. Not “fully legal”.
+3. Cadastral validation only for structures that passed municipal matching: complete containment vs overflow vs a **future** configurable threshold (and 2× threshold). Do not invent an overflow metric or numeric threshold until the user specifies them.
+4. Human verification (Lekhpal/Parvari, tehsil-scoped) for `audit_pending` and `disputed` only: Mark Verified or Locked Disputed.
+5. Stage 4 multi-department integration + conflict resolver **only** for eligible `verified` records → parcel-level Single Source of Truth with provenance.
+
+# Statuses (do not add extras unless technically required and documented)
+
+`ai_extracted` → no municipal overlap → `unregistered` (stop; municipal export only).
+
+`ai_extracted` → municipal overlap → cadastral check → `verified` | `audit_pending` | `disputed`.
+
+`audit_pending` / `disputed` → human → `verified` | `locked_disputed`.
+
+**Stage 4 allowed:** `verified` only.
+
+**Never auto-send to Stage 4:** `unregistered`, `audit_pending`, `disputed`, `locked_disputed`.
+
+`unregistered` is not “illegal”. `verified` is not a legal judgment. Municipal overlap is not full legality.
+
+# Locked spatial rules
+
+- **Municipal match:** `ai_extracted` intersects municipal geometry in any way (including shared edges). No minimum area/IoU.
+- **Primary parcel:** the cadastral parcel whose intersection with the structure has the **largest area** (the parcel that contains the major part of the structure). Use that `parcel_id`. Other overlapping parcels go in `related_parcel_ids`. If two parcels tie on intersection area, pick the smaller `parcel_id` (deterministic technical tie-break, not a legal rule).
+- **Overflow metric and threshold numbers:** undecided. Stage 3 must leave the measure and threshold as configuration placeholders; do not implement a chosen metric until the user decides.
+
+# Scope
+
+Focus on **server/backend** only. Do not build or change the React/Leaflet frontend until the user asks.
+
+# Prompt wording bugs (do not change the workflow)
+
+“Passes Stage 1” in municipal matching means **passed municipal matching (Stage 2)**. Unregistered later “passing Stage 1” after municipal update means **re-run municipal matching**, not GeoAI.

@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "name": "mock_anchor",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4326" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "bhu_aadhar_ulpin": "UP-12345678901234"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.700000, 28.980000],
+            [77.701000, 28.980000],
+            [77.701000, 28.981000],
+            [77.700000, 28.981000],
+            [77.700000, 28.980000]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:32644"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              119.99999999965075,
+              119.99999999999999
+            ],
+            [
+              279.9999999998254,
+              119.99999999999999
+            ],
+            [
+              280.00000000110595,
+              240.00000000000006
+            ],
+            [
+              120.00000000046566,
+              240.0
+            ],
+            [
+              119.99999999965075,
+              119.99999999999999
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-001",
+        "class": "building",
+        "confidence": 0.94,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic",
+        "status": "unregistered",
+        "stage2_reason": "No municipal building record overlaps this detected structure.",
+        "municipal_building_id": null
+      }
+    }
+  ]
+}
