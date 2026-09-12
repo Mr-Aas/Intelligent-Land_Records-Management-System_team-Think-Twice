@@ -35,6 +35,15 @@ STAGE3_VERIFIED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "sta
 STAGE3_AUDIT_PENDING_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage3_audit_pending.geojson")
 STAGE3_DISPUTED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage3_disputed.geojson")
 
+# Human Verification workflow paths
+HUMAN_VERIFICATION_RECORDS_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "human_verification_records.geojson")
+HUMAN_AUDIT_LOG_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "human_audit_log.json")
+
+# Stage 4 — Multi-Department Consolidated Single Source of Truth paths
+STAGE4_CONSOLIDATED_JSON_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage4_consolidated_parcels.json")
+STAGE4_CONSOLIDATED_GEOJSON_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage4_consolidated_parcels.geojson")
+
+
 # ---------------------------------------------------------------------------
 # Stage 1 — Raster tiling
 # ---------------------------------------------------------------------------
