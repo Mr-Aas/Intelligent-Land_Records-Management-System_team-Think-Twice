@@ -215,3 +215,86 @@ def get_parcel_by_id(parcel_id: str):
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f"Parcel '{parcel_id}' not found in consolidated records.",
     )
+
+
+# ---------------------------------------------------------------------------
+# Geospatial Layer Endpoints (QGIS-like GIS View)
+# ---------------------------------------------------------------------------
+@router.get("/layers/cadastral")
+def get_cadastral_layer():
+    """Retrieve Cadastral Bhu-Naksha parcels layer GeoJSON."""
+    path = Path(config.CADASTRAL_DATA_PATH)
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Cadastral data not found.")
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@router.get("/layers/municipal")
+def get_municipal_layer():
+    """Retrieve Municipal building records layer GeoJSON."""
+    path = Path(config.MUNICIPAL_DATA_PATH)
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Municipal data not found.")
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@router.get("/layers/ai-extracted")
+def get_ai_extracted_layer():
+    """Retrieve GeoAI-extracted raw structures layer GeoJSON."""
+    path = Path(config.AI_EXTRACTED_OUTPUT_PATH)
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="AI extracted data not found.")
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@router.get("/layers/review-structures")
+def get_review_structures_layer():
+    """
+    Retrieve all structures categorized by their current review state
+    (verified, audit_pending, disputed, locked_disputed).
+    """
+    structures: Dict[str, Dict[str, Any]] = {}
+
+    # 1. GeoAI Stage 3 outputs
+    v_path = Path(config.STAGE3_VERIFIED_OUTPUT_PATH)
+    if v_path.exists():
+        with open(v_path, "r", encoding="utf-8") as f:
+            for feat in json.load(f).get("features", []):
+                sid = feat.get("properties", {}).get("structure_id")
+                if sid:
+                    structures[sid] = feat
+
+    p_path = Path(config.STAGE3_AUDIT_PENDING_OUTPUT_PATH)
+    if p_path.exists():
+        with open(p_path, "r", encoding="utf-8") as f:
+            for feat in json.load(f).get("features", []):
+                sid = feat.get("properties", {}).get("structure_id")
+                if sid:
+                    structures[sid] = feat
+
+    d_path = Path(config.STAGE3_DISPUTED_OUTPUT_PATH)
+    if d_path.exists():
+        with open(d_path, "r", encoding="utf-8") as f:
+            for feat in json.load(f).get("features", []):
+                sid = feat.get("properties", {}).get("structure_id")
+                if sid:
+                    structures[sid] = feat
+
+    # 2. Human verification decisions overlay
+    h_path = Path(config.HUMAN_VERIFICATION_RECORDS_PATH)
+    if h_path.exists():
+        with open(h_path, "r", encoding="utf-8") as f:
+            for feat in json.load(f).get("features", []):
+                sid = feat.get("properties", {}).get("structure_id")
+                if sid:
+                    structures[sid] = feat
+
+    return {
+        "type": "FeatureCollection",
+        "name": "review_structures_layer",
+        "features": list(structures.values()),
+    }
+
