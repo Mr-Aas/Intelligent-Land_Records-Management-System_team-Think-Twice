@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 
-const landParcels = [
+const landLands = [
     {
         id: "UP_NAG_00123",
         khasraId: "Khasra/G0123",
@@ -50,10 +50,10 @@ const landParcels = [
 ];
 
 const filters = [
-    { label: "ALL PARCELS", value: "All" },
-    { label: "VERIFIED PLACES", value: "Verified" },
-    { label: "AUDIT PENDING CASES", value: "Audit Pending" },
-    { label: "ILLEGAL/DISPUTED PARCELS", value: "Illegal/Disputed" },
+    { label: "All Lands", value: "All" },
+    { label: "VERIFIED Lands", value: "Verified" },
+    { label: "AUDIT PENDING Lands", value: "Audit Pending" },
+    { label: "ILLEGAL/DISPUTED Lands", value: "Illegal/Disputed" },
 ];
 
 function StatusBadge({ status }) {
@@ -75,22 +75,22 @@ function StatusBadge({ status }) {
 export default function LandManage() {
     const [activeFilter, setActiveFilter] = useState("All");
     const [searchText, setSearchText] = useState("");
-    const [selectedParcel, setSelectedParcel] = useState(null);
+    const [selectedLand, setSelectedLand] = useState(null);
 
-    const filteredParcels = useMemo(() => {
+    const filteredLands = useMemo(() => {
         const search = searchText.trim().toLowerCase();
 
-        return landParcels.filter((parcel) => {
+        return landLands.filter((Land) => {
             const matchesFilter =
-                activeFilter === "All" || parcel.status === activeFilter;
+                activeFilter === "All" || Land.status === activeFilter;
 
             const matchesSearch =
                 !search ||
-                parcel.id.toLowerCase().includes(search) ||
-                parcel.khasraId.toLowerCase().includes(search) ||
-                parcel.propertyId.toLowerCase().includes(search) ||
-                parcel.owner.toLowerCase().includes(search) ||
-                parcel.location.toLowerCase().includes(search);
+                Land.id.toLowerCase().includes(search) ||
+                Land.khasraId.toLowerCase().includes(search) ||
+                Land.propertyId.toLowerCase().includes(search) ||
+                Land.owner.toLowerCase().includes(search) ||
+                Land.location.toLowerCase().includes(search);
 
             return matchesFilter && matchesSearch;
         });
@@ -101,7 +101,7 @@ export default function LandManage() {
             <div className="mb-6 overflow-x-auto">
                 <div className="flex min-w-max items-center gap-4">
                     <h2 className="whitespace-nowrap text-2xl font-bold text-slate-900">
-                        Land Parcel Management
+                        Land Record Management
                     </h2>
 
                     <div className="flex flex-nowrap gap-2">
@@ -110,8 +110,8 @@ export default function LandManage() {
                                 key={filter.value}
                                 onClick={() => setActiveFilter(filter.value)}
                                 className={`whitespace-nowrap rounded-lg border px-4 py-2 text-sm font-bold transition-all ${activeFilter === filter.value
-                                        ? "border-[#155e75] bg-[#155e75] text-white shadow-sm"
-                                        : "border-[#155e75] bg-white text-slate-800 hover:bg-[#8ecae6]/40"
+                                    ? "border-[#155e75] bg-[#155e75] text-white shadow-sm"
+                                    : "border-[#155e75] bg-white text-slate-800 hover:bg-[#8ecae6]/40"
                                     }`}
                             >
                                 {filter.label}
@@ -119,18 +119,18 @@ export default function LandManage() {
                         ))}
                     </div>
 
-                    <div className="relative ml-auto w-390px shrink-0">
+                    <div className="relative ml-auto shrink-0 pr-60">
                         <Search
-                            size={20}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"
+                            size={18}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500"
                         />
 
                         <input
                             type="search"
                             value={searchText}
                             onChange={(event) => setSearchText(event.target.value)}
-                            placeholder="Search by Khasra ID, Property ID, or Owner"
-                            className="w-full rounded-lg border border-slate-300 bg-white py-3 pl-10 pr-4 text-sm outline-none transition focus:border-[#155e75] focus:ring-2 focus:ring-[#8ecae6]"
+                            placeholder="Search Land Records"
+                            className="w-full rounded-lg border border-gray-300 bg-white pl-9 py-2 text-sm focus:border-[#155e75] focus:ring-2 focus:ring-[#8ecae6] outline-none"
                         />
                     </div>
                 </div>
@@ -140,8 +140,8 @@ export default function LandManage() {
                 <div className="border-b border-slate-200 px-5 py-4">
                     <h3 className="text-xl font-bold text-slate-900">Land Records List</h3>
                     <p className="mt-1 text-sm text-slate-500">
-                        Showing {filteredParcels.length} parcel
-                        {filteredParcels.length !== 1 ? "s" : ""}
+                        Showing {filteredLands.length} Land
+                        {filteredLands.length !== 1 ? "s" : ""}
                     </p>
                 </div>
 
@@ -149,7 +149,7 @@ export default function LandManage() {
                     <table className="w-full min-w-237.5 text-left">
                         <thead className="bg-slate-50 text-sm text-slate-700">
                             <tr>
-                                <th className="px-5 py-4 font-bold">Parcel ID</th>
+                                <th className="px-5 py-4 font-bold">Land ID</th>
                                 <th className="px-5 py-4 font-bold">Khasra/Gata ID</th>
                                 <th className="px-5 py-4 font-bold">Property ID</th>
                                 <th className="px-5 py-4 font-bold">Owner</th>
@@ -161,24 +161,24 @@ export default function LandManage() {
                         </thead>
 
                         <tbody className="divide-y divide-slate-200">
-                            {filteredParcels.map((parcel) => (
-                                <tr key={parcel.id} className="hover:bg-[#8ecae6]/10">
+                            {filteredLands.map((Land) => (
+                                <tr key={Land.id} className="hover:bg-[#8ecae6]/10">
                                     <td className="px-5 py-4 font-semibold text-slate-900">
-                                        {parcel.id}
+                                        {Land.id}
                                     </td>
-                                    <td className="px-5 py-4 text-slate-700">{parcel.khasraId}</td>
-                                    <td className="px-5 py-4 text-slate-700">{parcel.propertyId}</td>
-                                    <td className="px-5 py-4 text-slate-700">{parcel.owner}</td>
-                                    <td className="px-5 py-4 text-slate-700">{parcel.location}</td>
+                                    <td className="px-5 py-4 text-slate-700">{Land.khasraId}</td>
+                                    <td className="px-5 py-4 text-slate-700">{Land.propertyId}</td>
+                                    <td className="px-5 py-4 text-slate-700">{Land.owner}</td>
+                                    <td className="px-5 py-4 text-slate-700">{Land.location}</td>
                                     <td className="px-5 py-4">
-                                        <StatusBadge status={parcel.status} />
+                                        <StatusBadge status={Land.status} />
                                     </td>
                                     <td className="px-5 py-4 font-semibold text-slate-700">
-                                        {parcel.confidenceScore}%
+                                        {Land.confidenceScore}%
                                     </td>
                                     <td className="px-5 py-4">
                                         <button
-                                            onClick={() => setSelectedParcel(parcel)}
+                                            onClick={() => setSelectedLand(Land)}
                                             className="font-semibold text-[#155e75] hover:underline"
                                         >
                                             View Details
@@ -187,13 +187,13 @@ export default function LandManage() {
                                 </tr>
                             ))}
 
-                            {filteredParcels.length === 0 && (
+                            {filteredLands.length === 0 && (
                                 <tr>
                                     <td
                                         colSpan="8"
                                         className="px-5 py-12 text-center text-slate-500"
                                     >
-                                        No land parcels found for this filter or search.
+                                        No land Lands found for this filter or search.
                                     </td>
                                 </tr>
                             )}
@@ -202,15 +202,15 @@ export default function LandManage() {
                 </div>
             </section>
 
-            {selectedParcel && (
+            {selectedLand && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
                     <div className="w-full max-w-lg rounded-xl bg-white p-6 shadow-xl">
                         <div className="mb-5 flex items-center justify-between">
                             <h3 className="text-xl font-bold text-slate-900">
-                                Parcel Details
+                                Land Details
                             </h3>
                             <button
-                                onClick={() => setSelectedParcel(null)}
+                                onClick={() => setSelectedLand(null)}
                                 className="rounded-md px-3 py-1 text-slate-500 hover:bg-slate-100"
                             >
                                 Close
@@ -218,15 +218,15 @@ export default function LandManage() {
                         </div>
 
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <p><strong>Parcel ID:</strong> {selectedParcel.id}</p>
-                            <p><strong>Khasra ID:</strong> {selectedParcel.khasraId}</p>
-                            <p><strong>Property ID:</strong> {selectedParcel.propertyId}</p>
-                            <p><strong>Owner:</strong> {selectedParcel.owner}</p>
-                            <p><strong>Location:</strong> {selectedParcel.location}</p>
-                            <p><strong>Confidence:</strong> {selectedParcel.confidenceScore}%</p>
+                            <p><strong>Land ID:</strong> {selectedLand.id}</p>
+                            <p><strong>Khasra ID:</strong> {selectedLand.khasraId}</p>
+                            <p><strong>Property ID:</strong> {selectedLand.propertyId}</p>
+                            <p><strong>Owner:</strong> {selectedLand.owner}</p>
+                            <p><strong>Location:</strong> {selectedLand.location}</p>
+                            <p><strong>Confidence:</strong> {selectedLand.confidenceScore}%</p>
                             <div>
                                 <strong>Status:</strong>{" "}
-                                <StatusBadge status={selectedParcel.status} />
+                                <StatusBadge status={selectedV.status} />
                             </div>
                         </div>
                     </div>
