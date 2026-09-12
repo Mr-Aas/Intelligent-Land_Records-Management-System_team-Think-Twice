@@ -18,6 +18,7 @@ from __future__ import annotations
 import hashlib
 import logging
 import random
+import numpy as np
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
@@ -167,28 +168,77 @@ class MockInferenceAdapter(InferenceAdapter):
         return not (ax1 <= bx0 or bx1 <= ax0 or ay1 <= by0 or by1 <= ay0)
 
 
-# ── Real YOLOv11-seg adapter (stub) ─────────────────────────────────────
+# ── Real YOLOv11-seg adapter ─────────────────────────────────────────────
 
 class YOLOv11SegAdapter(InferenceAdapter):
     """Production adapter for **YOLOv11-seg** instance segmentation.
 
-    This stub exists so the interface is importable from day one.
-    Attempting to call ``predict()`` will raise ``NotImplementedError``
-    until a trained model checkpoint is loaded.
+    Uses Ultralytics YOLO to predict instance segmentation masks, converting
+    the resulting polygon contours to Detection instances in pixel space.
+    If no model path is specified, defaults to 'yolo11n-seg.pt'.
     """
 
-    def __init__(self, model_path: str | None = None) -> None:
+    def __init__(self, model_path: str = "yolo11n-seg.pt", conf_threshold: float = 0.25) -> None:
         self._model_path = model_path
-        # When ready:
-        #   from ultralytics import YOLO
-        #   self._model = YOLO(model_path)
+        self._conf_threshold = conf_threshold
+        from ultralytics import YOLO
+        logger.info("Initializing YOLOv11-seg model: %s", model_path)
+        self._model = YOLO(model_path)
 
     def predict(self, tile: TileInfo) -> list[Detection]:
-        raise NotImplementedError(
-            "YOLOv11SegAdapter is a stub.  Provide a trained model checkpoint "
-            "and implement this method to replace the mock adapter."
+        # tile.pixel_data shape is (bands, height, width)
+        # Convert to HWC format for YOLO / OpenCV
+        pixel_array = tile.pixel_data
+        if pixel_array.shape[0] >= 3:
+            # Transpose (C, H, W) -> (H, W, C) using first 3 channels (RGB)
+            img = np.transpose(pixel_array[:3], (1, 2, 0))
+        elif pixel_array.shape[0] == 1:
+            # Grayscale -> 3-channel
+            img = np.repeat(pixel_array[0][:, :, np.newaxis], 3, axis=2)
+        else:
+            img = np.transpose(pixel_array, (1, 2, 0))
+
+        # Ensure image is uint8
+        if img.dtype != np.uint8:
+            img = (img / img.max() * 255).astype(np.uint8) if img.max() > 0 else img.astype(np.uint8)
+
+        results = self._model.predict(
+            source=img,
+            conf=self._conf_threshold,
+            verbose=False,
         )
+
+        detections: list[Detection] = []
+        if not results or len(results) == 0:
+            return detections
+
+        res = results[0]
+        if res.masks is None or res.boxes is None:
+            return detections
+
+        # Extract polygons from segmentation masks
+        # res.masks.xy provides a list of Nx2 numpy arrays representing mask boundary coordinates
+        class_names = res.names
+        for mask_pts, box in zip(res.masks.xy, res.boxes):
+            if len(mask_pts) < 3:
+                continue
+
+            conf = float(box.conf[0]) if box.conf is not None else 0.5
+            cls_id = int(box.cls[0]) if box.cls is not None else 0
+            cls_name = class_names.get(cls_id, "building")
+
+            # Store polygon coordinates as list of (col, row) / (x, y) tuples
+            poly_coords = [(float(pt[0]), float(pt[1])) for pt in mask_pts]
+
+            detections.append(Detection(
+                pixel_polygon=poly_coords,
+                class_name=cls_name,
+                confidence=round(conf, 4),
+            ))
+
+        return detections
 
     @property
     def provenance_tag(self) -> str:
         return f"yolov11_seg (model={self._model_path})"
+
