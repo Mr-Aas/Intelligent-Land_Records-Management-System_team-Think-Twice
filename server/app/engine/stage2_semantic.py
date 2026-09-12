@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 THRESHOLDS_M = {
     "Dense Urban": 0.10,
     "Suburban": 0.15,
-    "Agricultural": 0.50
+    "Agricultural": 0.30
 }
 
 def get_zone_threshold(geom, zoning_gdf: gpd.GeoDataFrame) -> float:
@@ -84,8 +84,9 @@ def run_stage2_matching(stage1_results: dict, anchor_layer_path: str = None) -> 
     # If no Priority 1 data available for the region:
     if anchor_gdf is None or anchor_gdf.empty:
         logger.warning("Priority 1 (GNSS/Anchor) is missing. Activating pre-check-and-defer rule.")
-        
+        return "priority 1 is not present"
         for item in process_queue:
+
             geom = item["geom"]
             source = item["source"]
             
@@ -94,8 +95,10 @@ def run_stage2_matching(stage1_results: dict, anchor_layer_path: str = None) -> 
             has_overlap = False
             if source == "Priority 2" and check_overlap(geom, legacy_gdf):
                 has_overlap = True
+                print(f"legacy data checkOverlap result {check_overlap(geom,legacy_gdf)} ")
             elif source == "Priority 3" and check_overlap(geom, ai_gdf):
                 has_overlap = True
+                print(f"ai data checkOverlap result {check_overlap(geom,ai_gdf)} ")
                 
             if not has_overlap:
                 # Bypass -> Straight to VERIFIED
@@ -116,6 +119,7 @@ def run_stage2_matching(stage1_results: dict, anchor_layer_path: str = None) -> 
                 
     else:
         # Priority 1 is present. Proceed with Star Topology.
+        print(f" data of anchor_gdf priority1 \n {anchor_gdf}")
         anchor_sindex = anchor_gdf.sindex
         
         for item in process_queue:

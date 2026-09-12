@@ -64,11 +64,15 @@ def create_mock_data(output_dir: str = "data/synthetic"):
     }, geometry=[anchor_poly_1], crs="EPSG:4326")
     
     # Export to GeoJSON
-    zoning_path = os.path.join(output_dir, "mock_zoning.geojson")
-    ai_path = os.path.join(output_dir, "mock_ai_extracted.geojson")
-    legacy_path = os.path.join(output_dir, "mock_legacy_cadastral.geojson")
-    anchor_path = os.path.join(output_dir, "mock_anchor.geojson")
-    
+    # zoning_path = os.path.join(output_dir, "mock_zoning.geojson")
+    # ai_path = os.path.join(output_dir, "mock_ai_extracted.geojson")
+    # legacy_path = os.path.join(output_dir, "mock_legacy_cadastral.geojson")
+    # anchor_path = os.path.join(output_dir, "mock_anchor.geojson")
+    zoning_path = "e:/projects/sih-2026-project-1/data/real/zoningdata.geojson"
+    ai_path = "e:/projects/sih-2026-project-1/data/real/ai_extracteddata.geojson"
+    legacy_path = "e:/projects/sih-2026-project-1/data/real/cadastrialdata.geojson"
+    anchor_path = "e:/projects/sih-2026-project-1/data/real/gnssdata.geojson"
+
     gdf_zoning.to_file(zoning_path, driver="GeoJSON")
     gdf_ai.to_file(ai_path, driver="GeoJSON")
     gdf_legacy.to_file(legacy_path, driver="GeoJSON")

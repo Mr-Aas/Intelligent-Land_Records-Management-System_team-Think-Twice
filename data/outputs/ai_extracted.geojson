@@ -1,0 +1,395 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.51233119521457,
+              0.0010823267020356323
+            ],
+            [
+              76.51376463822598,
+              0.0010823288413258118
+            ],
+            [
+              76.51376463583577,
+              0.002164657682641522
+            ],
+            [
+              76.51233119282361,
+              0.0021646534040611607
+            ],
+            [
+              76.51233119521457,
+              0.0010823267020356323
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-001",
+        "class": "building",
+        "confidence": 0.94,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.51466054109864,
+              0.0013529127225462634
+            ],
+            [
+              76.51627316986401,
+              0.0013529157293145195
+            ],
+            [
+              76.51627316677282,
+              0.0025254426947051893
+            ],
+            [
+              76.51466053800637,
+              0.0025254370820711083
+            ],
+            [
+              76.51466054109864,
+              0.0013529127225462634
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-002",
+        "class": "residential_house",
+        "confidence": 0.91,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.51752743931925,
+              0.0012627235293596677
+            ],
+            [
+              76.51887130168286,
+              0.0012627258665438934
+            ],
+            [
+              76.51887129903007,
+              0.0023450623235693625
+            ],
+            [
+              76.51752743666567,
+              0.0023450579830843698
+            ],
+            [
+              76.51752743931925,
+              0.0012627235293596677
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-003",
+        "class": "building",
+        "confidence": 0.96,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.52048393947047,
+              0.0014431184802818772
+            ],
+            [
+              76.52209658116966,
+              0.0014431216833706115
+            ],
+            [
+              76.52209657761303,
+              0.002705853156301088
+            ],
+            [
+              76.52048393591258,
+              0.002705847150509707
+            ],
+            [
+              76.52048393947047,
+              0.0014431184802818772
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-004",
+        "class": "building",
+        "confidence": 0.93,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.5231716781044,
+              0.001172538102229766
+            ],
+            [
+              76.52478432576724,
+              0.0011725407031902902
+            ],
+            [
+              76.5247843223728,
+              0.0025254722837777114
+            ],
+            [
+              76.52317167470875,
+              0.002525466681708887
+            ],
+            [
+              76.5231716781044,
+              0.001172538102229766
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-005",
+        "class": "residential_house",
+        "confidence": 0.89,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.52603860944654,
+              0.0013529339140572593
+            ],
+            [
+              76.52774085546181,
+              0.001352937079849841
+            ],
+            [
+              76.52774085173864,
+              0.0027058741596799793
+            ],
+            [
+              76.52603860572198,
+              0.002705867828094812
+            ],
+            [
+              76.52603860944654,
+              0.0013529339140572593
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-006",
+        "class": "factory",
+        "confidence": 0.92,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.51349585440926,
+              0.004509701834304117
+            ],
+            [
+              76.51510848059036,
+              0.0045097118594466384
+            ],
+            [
+              76.51510847104895,
+              0.005862625417171394
+            ],
+            [
+              76.51349584486444,
+              0.005862612384486101
+            ],
+            [
+              76.51349585440926,
+              0.004509701834304117
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-007",
+        "class": "building",
+        "confidence": 0.9,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.51663151859117,
+              0.004690110177318418
+            ],
+            [
+              76.5180649701029,
+              0.004690119438763832
+            ],
+            [
+              76.51806496169536,
+              0.005862649298358502
+            ],
+            [
+              76.51663151018097,
+              0.005862637721551719
+            ],
+            [
+              76.51663151859117,
+              0.004690110177318418
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-008",
+        "class": "residential_house",
+        "confidence": 0.95,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.52003597167959,
+              0.004509742469678235
+            ],
+            [
+              76.52155902114447,
+              0.004509751924270355
+            ],
+            [
+              76.52155901232918,
+              0.005772482462966606
+            ],
+            [
+              76.52003596286133,
+              0.00577247036108868
+            ],
+            [
+              76.52003597167959,
+              0.004509742469678235
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-009",
+        "class": "building",
+        "confidence": 0.88,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.52353002994694,
+              0.004690154721076953
+            ],
+            [
+              76.52505308673459,
+              0.004690164546245095
+            ],
+            [
+              76.52505307834005,
+              0.005862705682710148
+            ],
+            [
+              76.52353002154956,
+              0.005862693401249955
+            ],
+            [
+              76.52353002994694,
+              0.004690154721076953
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-010",
+        "class": "residential_house",
+        "confidence": 0.97,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "fixture_not_model_output",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic"
+      }
+    }
+  ]
+}
