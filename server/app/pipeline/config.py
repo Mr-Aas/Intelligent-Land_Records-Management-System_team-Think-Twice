@@ -30,6 +30,11 @@ DLR_DATA_PATH: str = str(_PROJECT_ROOT / "data" / "synthetic_urban_land_departme
 STAGE2_MATCHED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage2_municipal_matched.geojson")
 STAGE2_UNREGISTERED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage2_unregistered.geojson")
 
+# Stage 3 — Cadastral validation output paths
+STAGE3_VERIFIED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage3_verified.geojson")
+STAGE3_AUDIT_PENDING_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage3_audit_pending.geojson")
+STAGE3_DISPUTED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage3_disputed.geojson")
+
 # ---------------------------------------------------------------------------
 # Stage 1 — Raster tiling
 # ---------------------------------------------------------------------------
@@ -52,8 +57,10 @@ MOCK_RANDOM_SEED: int = 42       # deterministic synthetic detections
 DEDUP_IOU_THRESHOLD: float = 0.5
 
 # ---------------------------------------------------------------------------
-# Stage 3 — Cadastral validation (PLACEHOLDERS — metric TBD by user)
+# Stage 3 — Cadastral validation thresholds
 # ---------------------------------------------------------------------------
-OVERFLOW_THRESHOLD = None   # numeric value TBD
-OVERFLOW_METRIC = None      # measurement method TBD ("area_ratio", "hausdorff", …)
+# Max boundary exceedance distance threshold (in metres, per dataset manifest)
+OVERFLOW_THRESHOLD: float = 10.0
+OVERFLOW_METRIC: str = "boundary_exceedance_distance"
+
 
