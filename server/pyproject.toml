@@ -7,4 +7,5 @@ requires-python = ">=3.11"
 dependencies = [
     "fastapi[standard]>=0.141.1",
     "geopandas>=1.1.4",
+    "rasterio>=1.4.4",
 ]

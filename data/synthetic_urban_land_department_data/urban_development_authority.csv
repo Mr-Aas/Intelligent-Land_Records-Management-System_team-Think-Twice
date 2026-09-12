@@ -1,0 +1,11 @@
+record_id,parcel_id,tehsil,land_area_sqm,owner_name,purpose_of_use,record_status,updated_at,development_authority_id,development_status
+DA-102,PAR-102,Tehsil-Alpha,90000,Owner_A,residential,active,2026-07-30,DEV-102,approved
+DA-103,PAR-103,Tehsil-Alpha,70000,Owner_B,residential,active,2026-07-30,DEV-103,approved
+DA-104,PAR-104,Tehsil-Alpha,85400,Owner_C,commercial,active,2026-07-30,DEV-104,approved
+DA-105,PAR-105,Tehsil-Beta,73750,Owner_D,residential,active,2026-07-30,DEV-105,approved
+DA-106,PAR-106,Tehsil-Beta,93000,Owner_E,industrial,active,2026-07-30,DEV-106,approved
+DA-107,PAR-107,Tehsil-Alpha,69600,Owner_F,residential,active,2026-07-30,DEV-107,approved
+DA-108,PAR-108,Tehsil-Alpha,46400,Owner_G,residential,active,2026-07-30,DEV-108,approved
+DA-109,PAR-109,Tehsil-Beta,72800,Owner_H,residential,active,2026-07-30,DEV-109,approved
+DA-110,PAR-110,Tehsil-Beta,87000,Owner_I,commercial,active,2026-07-30,DEV-110,approved
+DA-111,PAR-111,Tehsil-Beta,87000,Owner_J,residential,active,2026-07-30,DEV-111,approved
