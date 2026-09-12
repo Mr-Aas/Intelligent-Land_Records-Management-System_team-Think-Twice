@@ -1,0 +1,12 @@
+[project]
+name = "server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+    "geopandas>=1.1.4",
+    "pytest>=9.1.1",
+    "rasterio>=1.4.4",
+]

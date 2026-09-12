@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.7012, 28.9842],
+            [77.7028, 28.9842],
+            [77.7028, 28.9858],
+            [77.7012, 28.9858],
+            [77.7012, 28.9842]
+          ]
+        ]
+      },
+      "properties": {
+        "object_id": "AI_BLDG_9942",
+        "source": "Drone_ORI_2026",
+        "confidence_score": 0.94,
+        "roof_type": "concrete"
+      }
+    }
+  ]
+}
