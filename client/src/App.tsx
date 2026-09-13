@@ -4,6 +4,8 @@ import { VerificationQueue } from './components/VerificationQueue';
 import { GISMap } from './components/GISMap';
 import { ConsolidatedParcelsView } from './components/ConsolidatedParcelsView';
 import { AuditLogModal } from './components/AuditLogModal';
+import { LoginPage } from './components/LoginPage';
+import { SignupPage } from './components/SignupPage';
 import type {
   AuditLogEntry,
   ConsolidatedParcel,
@@ -18,28 +20,41 @@ import * as api from './services/api';
 const INITIAL_OFFICIALS: Record<string, OfficialProfile> = {
   official_alpha: {
     official_id: 'official_alpha',
-    username: 'official_alpha',
+    username: 'ramesh_alpha',
     name: 'Ramesh Kumar',
     role: 'Lekhpal',
     tehsil: 'Tehsil-Alpha',
-    district: 'Synthetic-District',
+    district: 'Kumaon District',
   },
   official_beta: {
     official_id: 'official_beta',
-    username: 'official_beta',
+    username: 'suresh_beta',
     name: 'Suresh Singh',
     role: 'Lekhpal',
     tehsil: 'Tehsil-Beta',
-    district: 'Synthetic-District',
+    district: 'Kumaon District',
   },
 };
 
 export default function App() {
-  // Navigation & Authentication state
+  // Authentication & Auth Routing state
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return localStorage.getItem('gis_autopilot_auth') === 'true';
+  });
+  const [authPageMode, setAuthPageMode] = useState<'login' | 'signup'>('login');
+  const [currentOfficial, setCurrentOfficial] = useState<OfficialProfile>(() => {
+    const saved = localStorage.getItem('gis_autopilot_official');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    return INITIAL_OFFICIALS.official_alpha;
+  });
+
+  // Navigation & Sidebar Toggle state
   const [activeView, setActiveView] = useState<'queue' | 'parcels'>('queue');
-  const [currentOfficial, setCurrentOfficial] = useState<OfficialProfile>(
-    INITIAL_OFFICIALS.official_beta
-  );
+  const [isQueueOpen, setIsQueueOpen] = useState<boolean>(true);
 
   // GIS Layers state
   const [cadastralLayer, setCadastralLayer] = useState<GeoJSONFeatureCollection | null>(null);
@@ -124,21 +139,38 @@ export default function App() {
     }
   }, []);
 
-  // Initial mount load
+  // Initial mount load when authenticated
   useEffect(() => {
-    loadBaseLayers();
-    loadQueue(currentOfficial.official_id);
-    loadParcels();
-  }, [loadBaseLayers, loadQueue, loadParcels, currentOfficial.official_id]);
-
-  // Handle switching official profile
-  const handleSwitchOfficial = (officialId: string) => {
-    const nextOfficial = INITIAL_OFFICIALS[officialId];
-    if (nextOfficial) {
-      setCurrentOfficial(nextOfficial);
-      loadQueue(nextOfficial.official_id);
-      setSelectedFeature(null);
+    if (isAuthenticated) {
+      loadBaseLayers();
+      loadQueue(currentOfficial.official_id);
+      loadParcels();
     }
+  }, [isAuthenticated, loadBaseLayers, loadQueue, loadParcels, currentOfficial.official_id]);
+
+  // Handle Login
+  const handleLogin = (official: OfficialProfile) => {
+    setCurrentOfficial(official);
+    setIsAuthenticated(true);
+    localStorage.setItem('gis_autopilot_auth', 'true');
+    localStorage.setItem('gis_autopilot_official', JSON.stringify(official));
+  };
+
+  // Handle Logout
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('gis_autopilot_auth');
+    localStorage.removeItem('gis_autopilot_official');
+    setSelectedFeature(null);
+  };
+
+  // Handle switching official profile inside active workspace
+  const handleSwitchOfficial = (officialId: string) => {
+    const nextOfficial = INITIAL_OFFICIALS[officialId] || currentOfficial;
+    setCurrentOfficial(nextOfficial);
+    localStorage.setItem('gis_autopilot_official', JSON.stringify(nextOfficial));
+    loadQueue(nextOfficial.official_id);
+    setSelectedFeature(null);
   };
 
   // -------------------------------------------------------------------------
@@ -179,8 +211,21 @@ export default function App() {
     }
   };
 
+  // If not authenticated, render Login or Signup page
+  if (!isAuthenticated) {
+    if (authPageMode === 'signup') {
+      return <SignupPage onNavigateToLogin={() => setAuthPageMode('login')} />;
+    }
+    return (
+      <LoginPage
+        onLogin={handleLogin}
+        onNavigateToSignup={() => setAuthPageMode('signup')}
+      />
+    );
+  }
+
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-slate-950">
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#f4f4ef]">
       {/* Top Application Navbar */}
       <Navbar
         currentOfficial={currentOfficial}
@@ -194,29 +239,37 @@ export default function App() {
         onTriggerStage4={handleTriggerStage4}
         isStage4Running={isStage4Running}
         pendingCount={queue.length}
+        onLogout={handleLogout}
+        isQueueOpen={isQueueOpen}
+        onToggleQueue={() => setIsQueueOpen(!isQueueOpen)}
       />
 
       {/* Main Content Workspace */}
       <main className="flex-1 flex overflow-hidden relative">
         {activeView === 'queue' ? (
           <>
-            {/* Left Sidebar: Lekhpal Review Queue */}
-            <VerificationQueue
-              queue={queue}
-              selectedStructureId={selectedFeature?.properties?.structure_id || null}
-              onSelectStructure={(feature) => setSelectedFeature(feature)}
-              onAction={handleHumanAction}
-              currentTehsil={currentOfficial.tehsil}
-              isLoading={isQueueLoading}
-            />
+            {/* Left Sidebar: Lekhpal Review Queue (Toggleable via Hamburger Button) */}
+            {isQueueOpen && (
+              <VerificationQueue
+                queue={queue}
+                selectedStructureId={selectedFeature?.properties?.structure_id || null}
+                onSelectStructure={(feature) => setSelectedFeature(feature)}
+                onAction={handleHumanAction}
+                currentTehsil={currentOfficial.tehsil}
+                isLoading={isQueueLoading}
+                onCloseQueue={() => setIsQueueOpen(false)}
+              />
+            )}
 
-            {/* Center/Right Workspace: Interactive QGIS-like Map */}
+            {/* Center/Right Workspace: Interactive Map */}
             <GISMap
               cadastralLayer={cadastralLayer}
               municipalLayer={municipalLayer}
               reviewStructuresLayer={reviewStructuresLayer}
               selectedFeature={selectedFeature}
               onSelectFeature={(feature) => setSelectedFeature(feature)}
+              isQueueOpen={isQueueOpen}
+              onToggleQueue={() => setIsQueueOpen(!isQueueOpen)}
             />
           </>
         ) : (

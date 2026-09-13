@@ -164,6 +164,89 @@
           "notes": "Severe encroachment confirmed by Lekhpal."
         }
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.51349585440926,
+              0.004509701834304114
+            ],
+            [
+              76.51510848059036,
+              0.004509711859446635
+            ],
+            [
+              76.51510847104895,
+              0.005862625417171395
+            ],
+            [
+              76.51349584486444,
+              0.005862612384486101
+            ],
+            [
+              76.51349585440926,
+              0.004509701834304114
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-007",
+        "class": "building",
+        "confidence": 0.9,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "human_official",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic",
+        "status": "locked_disputed",
+        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-007.",
+        "municipal_building_id": "MUN-BLD-007",
+        "municipal_record": {
+          "municipal_building_id": "MUN-BLD-007",
+          "structure_ref": "STR-007",
+          "building_status": "registered",
+          "building_use": "residential",
+          "source_department": "Urban Local Body / Municipal Corporation",
+          "source_authority": "Synthetic Meerut Nagar Nigam",
+          "record_status": "synthetic"
+        },
+        "parcel_id": "PAR-107",
+        "related_parcel_ids": [
+          "PAR-108"
+        ],
+        "overflow_measure": 90.0,
+        "configured_threshold": 10.0,
+        "reason": "Major overflow on parcel PAR-107 and neighboring parcel(s) PAR-108 exceeds 2x threshold (20.00 m) with measured exceedance of 90.00 m.",
+        "municipality_reference": "MUN-BLD-007",
+        "provenance": "geoai_pipeline",
+        "cadastral_record": {
+          "parcel_id": "PAR-107",
+          "khasra_no": "KHS-107",
+          "khata_no": "KHT-107",
+          "land_use": "residential",
+          "record_area_sqm": 69600.0,
+          "tehsil": "Tehsil-Alpha",
+          "district": "Synthetic-District",
+          "source_department": "Directorate of Land Records / Cadastral System",
+          "source_system": "Synthetic Bhu-Naksha",
+          "record_status": "synthetic"
+        },
+        "human_verification": {
+          "action": "lock_disputed",
+          "official_id": "official_alpha",
+          "official_name": "Ramesh Kumar",
+          "official_role": "Lekhpal",
+          "tehsil": "Tehsil-Alpha",
+          "previous_status": "disputed",
+          "new_status": "locked_disputed",
+          "timestamp": "2026-09-13T06:48:44.177000+00:00",
+          "notes": ""
+        }
+      }
     }
   ]
 }

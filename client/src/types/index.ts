@@ -101,6 +101,7 @@ export interface ConsolidatedParcel {
     area: ConflictDetail;
   };
   source_provenance: Record<string, any>;
+  department_records?: Record<string, any>;
   resolver_metadata: {
     resolver_name: string;
     is_production_ai: boolean;

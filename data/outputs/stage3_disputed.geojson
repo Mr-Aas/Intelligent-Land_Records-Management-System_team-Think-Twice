@@ -3,7 +3,7 @@
   "crs": {
     "type": "name",
     "properties": {
-      "name": "EPSG:32644"
+      "name": "EPSG:4326"
     }
   },
   "features": [
@@ -14,256 +14,24 @@
         "coordinates": [
           [
             [
-              76.51194161052669,
-              1.2202439819700718e-08
+              76.52603860944654,
+              0.0013529339140572593
             ],
             [
-              76.51194162497423,
-              1.2202466939142387e-08
+              76.52774085546181,
+              0.0013529370798498403
             ],
             [
-              76.5119416249742,
-              2.2777938286261604e-08
+              76.52774085173864,
+              0.0027058741596799793
             ],
             [
-              76.51194161052665,
-              2.2777887663303793e-08
+              76.52603860572198,
+              0.002705867828094812
             ],
             [
-              76.51194161052669,
-              1.2202439819700718e-08
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "structure_id": "STR-002",
-        "class": "residential_house",
-        "confidence": 0.91,
-        "source": "synthetic_ground_truth_fixture",
-        "verification_method": "geoai",
-        "processing_crs": "EPSG:32644",
-        "record_status": "synthetic",
-        "status": "disputed",
-        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-002.",
-        "municipal_building_id": "MUN-BLD-002",
-        "municipal_record": {
-          "municipal_building_id": "MUN-BLD-002",
-          "structure_ref": "STR-002",
-          "building_status": "registered",
-          "building_use": "residential",
-          "source_department": "Urban Local Body / Municipal Corporation",
-          "source_authority": "Synthetic Meerut Nagar Nigam",
-          "record_status": "synthetic"
-        },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
-        "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
-        "municipality_reference": "MUN-BLD-002",
-        "provenance": "geoai_pipeline"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              76.51194163621123,
-              1.1388988823667735e-08
-            ],
-            [
-              76.5119416482509,
-              1.1389009903819655e-08
-            ],
-            [
-              76.51194164825088,
-              2.1151018392698306e-08
-            ],
-            [
-              76.51194163621122,
-              2.115097924384471e-08
-            ],
-            [
-              76.51194163621123,
-              1.1388988823667735e-08
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "structure_id": "STR-003",
-        "class": "building",
-        "confidence": 0.96,
-        "source": "synthetic_ground_truth_fixture",
-        "verification_method": "geoai",
-        "processing_crs": "EPSG:32644",
-        "record_status": "synthetic",
-        "status": "disputed",
-        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-003.",
-        "municipal_building_id": "MUN-BLD-003",
-        "municipal_record": {
-          "municipal_building_id": "MUN-BLD-003",
-          "structure_ref": "STR-003",
-          "building_status": "registered",
-          "building_use": "residential",
-          "source_department": "Urban Local Body / Municipal Corporation",
-          "source_authority": "Synthetic Meerut Nagar Nigam",
-          "record_status": "synthetic"
-        },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
-        "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
-        "municipality_reference": "MUN-BLD-003",
-        "provenance": "geoai_pipeline"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              76.51194166269853,
-              1.3016040219107727e-08
-            ],
-            [
-              76.5119416771462,
-              1.301606910925546e-08
-            ],
-            [
-              76.51194167714617,
-              2.4405129579684346e-08
-            ],
-            [
-              76.5119416626985,
-              2.4405075410657312e-08
-            ],
-            [
-              76.51194166269853,
-              1.3016040219107727e-08
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "structure_id": "STR-004",
-        "class": "building",
-        "confidence": 0.93,
-        "source": "synthetic_ground_truth_fixture",
-        "verification_method": "geoai",
-        "processing_crs": "EPSG:32644",
-        "record_status": "synthetic",
-        "status": "disputed",
-        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-004.",
-        "municipal_building_id": "MUN-BLD-004",
-        "municipal_record": {
-          "municipal_building_id": "MUN-BLD-004",
-          "structure_ref": "STR-004",
-          "building_status": "registered",
-          "building_use": "mixed_use",
-          "source_department": "Urban Local Body / Municipal Corporation",
-          "source_authority": "Synthetic Meerut Nagar Nigam",
-          "record_status": "synthetic"
-        },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
-        "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
-        "municipality_reference": "MUN-BLD-004",
-        "provenance": "geoai_pipeline"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              76.511941686778,
-              1.0575571795452815e-08
-            ],
-            [
-              76.51194170122572,
-              1.0575595254726167e-08
-            ],
-            [
-              76.51194170122568,
-              2.2778205163874425e-08
-            ],
-            [
-              76.51194168677797,
-              2.2778154636208713e-08
-            ],
-            [
-              76.511941686778,
-              1.0575571795452815e-08
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "structure_id": "STR-005",
-        "class": "residential_house",
-        "confidence": 0.89,
-        "source": "synthetic_ground_truth_fixture",
-        "verification_method": "geoai",
-        "processing_crs": "EPSG:32644",
-        "record_status": "synthetic",
-        "status": "disputed",
-        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-005.",
-        "municipal_building_id": "MUN-BLD-005",
-        "municipal_record": {
-          "municipal_building_id": "MUN-BLD-005",
-          "structure_ref": "STR-005",
-          "building_status": "registered",
-          "building_use": "residential",
-          "source_department": "Urban Local Body / Municipal Corporation",
-          "source_authority": "Synthetic Meerut Nagar Nigam",
-          "record_status": "synthetic"
-        },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
-        "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
-        "municipality_reference": "MUN-BLD-005",
-        "provenance": "geoai_pipeline"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              76.51194171246286,
-              1.2202630955798699e-08
-            ],
-            [
-              76.51194172771328,
-              1.2202659509555398e-08
-            ],
-            [
-              76.51194172771325,
-              2.4405319018933087e-08
-            ],
-            [
-              76.51194171246281,
-              2.4405261911419657e-08
-            ],
-            [
-              76.51194171246286,
-              1.2202630955798699e-08
+              76.52603860944654,
+              0.0013529339140572593
             ]
           ]
         ]
@@ -288,13 +56,25 @@
           "source_authority": "Synthetic Meerut Nagar Nigam",
           "record_status": "synthetic"
         },
-        "parcel_id": null,
+        "parcel_id": "PAR-106",
         "related_parcel_ids": [],
-        "overflow_measure": Infinity,
+        "overflow_measure": 30.0,
         "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
+        "reason": "Major overflow on parcel PAR-106 exceeds 2x threshold (20.00 m) with measured exceedance of 30.00 m.",
         "municipality_reference": "MUN-BLD-006",
-        "provenance": "geoai_pipeline"
+        "provenance": "geoai_pipeline",
+        "cadastral_record": {
+          "parcel_id": "PAR-106",
+          "khasra_no": "KHS-106",
+          "khata_no": "KHT-106",
+          "land_use": "industrial",
+          "record_area_sqm": 86800.0,
+          "tehsil": "Tehsil-Beta",
+          "district": "Synthetic-District",
+          "source_department": "Directorate of Land Records / Cadastral System",
+          "source_system": "Synthetic Bhu-Naksha",
+          "record_status": "synthetic"
+        }
       }
     },
     {
@@ -304,24 +84,24 @@
         "coordinates": [
           [
             [
-              76.51194160009224,
-              4.067473409040707e-08
+              76.51349585440926,
+              0.004509701834304114
             ],
             [
-              76.51194161453977,
-              4.067482451183103e-08
+              76.51510848059036,
+              0.004509711859446635
             ],
             [
-              76.5119416145397,
-              5.287727186439511e-08
+              76.51510847104895,
+              0.005862625417171395
             ],
             [
-              76.51194160009216,
-              5.2877154316543836e-08
+              76.51349584486444,
+              0.005862612384486101
             ],
             [
-              76.51194160009224,
-              4.067473409040707e-08
+              76.51349585440926,
+              0.004509701834304114
             ]
           ]
         ]
@@ -346,187 +126,27 @@
           "source_authority": "Synthetic Meerut Nagar Nigam",
           "record_status": "synthetic"
         },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
+        "parcel_id": "PAR-107",
+        "related_parcel_ids": [
+          "PAR-108"
+        ],
+        "overflow_measure": 90.0,
         "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
+        "reason": "Major overflow on parcel PAR-107 and neighboring parcel(s) PAR-108 exceeds 2x threshold (20.00 m) with measured exceedance of 90.00 m.",
         "municipality_reference": "MUN-BLD-007",
-        "provenance": "geoai_pipeline"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              76.51194162818467,
-              4.230190627535521e-08
-            ],
-            [
-              76.51194164102697,
-              4.23019898086402e-08
-            ],
-            [
-              76.51194164102691,
-              5.287748725993178e-08
-            ],
-            [
-              76.5119416281846,
-              5.287738284332542e-08
-            ],
-            [
-              76.51194162818467,
-              4.230190627535521e-08
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "structure_id": "STR-008",
-        "class": "residential_house",
-        "confidence": 0.95,
-        "source": "synthetic_ground_truth_fixture",
-        "verification_method": "geoai",
-        "processing_crs": "EPSG:32644",
-        "record_status": "synthetic",
-        "status": "disputed",
-        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-008.",
-        "municipal_building_id": "MUN-BLD-008",
-        "municipal_record": {
-          "municipal_building_id": "MUN-BLD-008",
-          "structure_ref": "STR-008",
-          "building_status": "registered",
-          "building_use": "residential",
-          "source_department": "Urban Local Body / Municipal Corporation",
-          "source_authority": "Synthetic Meerut Nagar Nigam",
+        "provenance": "geoai_pipeline",
+        "cadastral_record": {
+          "parcel_id": "PAR-107",
+          "khasra_no": "KHS-107",
+          "khata_no": "KHT-107",
+          "land_use": "residential",
+          "record_area_sqm": 69600.0,
+          "tehsil": "Tehsil-Alpha",
+          "district": "Synthetic-District",
+          "source_department": "Directorate of Land Records / Cadastral System",
+          "source_system": "Synthetic Bhu-Naksha",
           "record_status": "synthetic"
-        },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
-        "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
-        "municipality_reference": "MUN-BLD-008",
-        "provenance": "geoai_pipeline"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              76.51194165868519,
-              4.067510059975104e-08
-            ],
-            [
-              76.5119416723302,
-              4.067518587511663e-08
-            ],
-            [
-              76.51194167233011,
-              5.2064237919252315e-08
-            ],
-            [
-              76.51194165868512,
-              5.206412876678424e-08
-            ],
-            [
-              76.51194165868519,
-              4.067510059975104e-08
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "structure_id": "STR-009",
-        "class": "building",
-        "confidence": 0.88,
-        "source": "synthetic_ground_truth_fixture",
-        "verification_method": "geoai",
-        "processing_crs": "EPSG:32644",
-        "record_status": "synthetic",
-        "status": "disputed",
-        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-009.",
-        "municipal_building_id": "MUN-BLD-009",
-        "municipal_record": {
-          "municipal_building_id": "MUN-BLD-009",
-          "structure_ref": "STR-009",
-          "building_status": "registered",
-          "building_use": "commercial",
-          "source_department": "Urban Local Body / Municipal Corporation",
-          "source_authority": "Synthetic Meerut Nagar Nigam",
-          "record_status": "synthetic"
-        },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
-        "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
-        "municipality_reference": "MUN-BLD-009",
-        "provenance": "geoai_pipeline"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              76.51194168998848,
-              4.230230803623922e-08
-            ],
-            [
-              76.51194170363354,
-              4.230239665400301e-08
-            ],
-            [
-              76.51194170363348,
-              5.287799581663589e-08
-            ],
-            [
-              76.5119416899884,
-              5.287788504443102e-08
-            ],
-            [
-              76.51194168998848,
-              4.230230803623922e-08
-            ]
-          ]
-        ]
-      },
-      "properties": {
-        "structure_id": "STR-010",
-        "class": "residential_house",
-        "confidence": 0.97,
-        "source": "synthetic_ground_truth_fixture",
-        "verification_method": "geoai",
-        "processing_crs": "EPSG:32644",
-        "record_status": "synthetic",
-        "status": "disputed",
-        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-010.",
-        "municipal_building_id": "MUN-BLD-010",
-        "municipal_record": {
-          "municipal_building_id": "MUN-BLD-010",
-          "structure_ref": "STR-010",
-          "building_status": "registered",
-          "building_use": "residential",
-          "source_department": "Urban Local Body / Municipal Corporation",
-          "source_authority": "Synthetic Meerut Nagar Nigam",
-          "record_status": "synthetic"
-        },
-        "parcel_id": null,
-        "related_parcel_ids": [],
-        "overflow_measure": Infinity,
-        "configured_threshold": 10.0,
-        "reason": "Structure does not intersect any cadastral land parcel.",
-        "municipality_reference": "MUN-BLD-010",
-        "provenance": "geoai_pipeline"
+        }
       }
     }
   ]

@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import {
   Layers,
   Search,
-  AlertTriangle,
-  CheckCircle,
-  FileText,
   Building,
-  User,
-  Maximize2,
   RefreshCw,
 } from 'lucide-react';
 import type { ConsolidatedParcel } from '../types';
@@ -48,19 +43,19 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
     parcels.find((p) => p.parcel_id === selectedParcelId) || parcels[0] || null;
 
   return (
-    <div className="flex-1 flex h-full bg-slate-950 overflow-hidden text-white">
+    <div className="flex-1 flex h-full bg-[#f4f4ef] overflow-hidden text-slate-800">
       {/* Left Column: Parcel Registry List */}
-      <div className="w-84 border-r border-slate-800 bg-slate-900 flex flex-col h-full shrink-0">
-        <div className="p-3 border-b border-slate-800 space-y-2">
+      <div className="w-84 border-r border-[#d2d2c8] bg-[#fafaf7] flex flex-col h-full shrink-0 shadow-sm">
+        <div className="p-3.5 border-b border-[#d2d2c8] bg-[#efefea] space-y-2.5">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold flex items-center gap-1.5 text-slate-100">
-              <Layers className="w-4 h-4 text-indigo-400" />
+            <h2 className="text-sm font-black flex items-center gap-1.5 text-slate-900">
+              <Layers className="w-4 h-4 text-[#29cc39]" />
               <span>Single Source of Truth</span>
             </h2>
             <button
               onClick={onTriggerStage4}
               disabled={isStage4Running}
-              className="text-[11px] bg-indigo-600/80 hover:bg-indigo-600 px-2 py-0.5 rounded text-white font-medium flex items-center gap-1 transition"
+              className="text-[11px] bg-[#29cc39] hover:bg-[#22a229] px-2.5 py-1 rounded-lg text-white font-bold flex items-center gap-1 transition shadow-sm cursor-pointer"
             >
               <RefreshCw className={`w-3 h-3 ${isStage4Running ? 'animate-spin' : ''}`} />
               <span>Refresh</span>
@@ -75,17 +70,17 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
               placeholder="Search parcel, khasra, owner..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-md pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+              className="w-full bg-white border border-[#d2d2c8] rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#29cc39]"
             />
           </div>
 
           {/* Conflict Toggle */}
-          <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-400 hover:text-slate-200">
+          <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-600 hover:text-slate-900">
             <input
               type="checkbox"
               checked={filterConflictOnly}
               onChange={(e) => setFilterConflictOnly(e.target.checked)}
-              className="rounded border-slate-700 bg-slate-800 text-indigo-600 focus:ring-0"
+              className="rounded border-[#d2d2c8] bg-white text-[#29cc39] focus:ring-0 cursor-pointer"
             />
             <span>Show Conflicted Parcels Only</span>
           </label>
@@ -101,48 +96,30 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
               <div
                 key={parcel.parcel_id}
                 onClick={() => onSelectParcel(parcel.parcel_id)}
-                className={`p-2.5 rounded-lg border transition cursor-pointer ${
+                className={`p-3 rounded-xl border text-xs transition cursor-pointer ${
                   isSelected
-                    ? 'bg-slate-800 border-indigo-500 shadow ring-1 ring-indigo-500/40'
-                    : 'bg-slate-950/60 hover:bg-slate-800/40 border-slate-800/80 hover:border-slate-700'
+                    ? 'bg-white border-[#29cc39] ring-2 ring-[#29cc39]/30 shadow-md'
+                    : 'bg-[#f4f4ef] hover:bg-white border-[#d2d2c8]'
                 }`}
               >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <span className="text-xs font-bold text-slate-100">
-                      {parcel.parcel_id}
-                    </span>
-                    <span className="text-[11px] text-slate-400 ml-1.5">
-                      (Khasra {parcel.khasra_no})
-                    </span>
-                  </div>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-bold text-slate-900">{parcel.parcel_id}</span>
                   {hasConflict ? (
-                    <span className="text-[10px] bg-amber-500/20 text-amber-300 font-semibold px-1.5 py-0.2 rounded border border-amber-500/30 flex items-center gap-0.5">
-                      <AlertTriangle className="w-2.5 h-2.5" />
-                      <span>Conflict</span>
+                    <span className="text-[10px] bg-red-100 border border-red-300 text-red-700 font-bold px-1.5 py-0.2 rounded">
+                      Conflict
                     </span>
                   ) : (
-                    <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded border border-emerald-500/30 flex items-center gap-0.5">
-                      <CheckCircle className="w-2.5 h-2.5" />
-                      <span>Consistent</span>
+                    <span className="text-[10px] bg-[#29cc39]/15 border border-[#29cc39]/30 text-[#1b7a21] font-bold px-1.5 py-0.2 rounded">
+                      Unified
                     </span>
                   )}
                 </div>
-
-                <div className="text-[11px] text-slate-300 mt-1 flex items-center justify-between">
-                  <span className="truncate max-w-[140px] text-slate-200">
-                    {parcel.resolved_owner}
-                  </span>
-                  <span className="text-slate-400 capitalize">
-                    {parcel.resolved_land_use}
-                  </span>
+                <div className="text-[11px] text-slate-600 flex justify-between">
+                  <span>Khasra: <strong>{parcel.khasra_no}</strong></span>
+                  <span className="text-amber-700 font-semibold">{parcel.tehsil}</span>
                 </div>
-
-                <div className="text-[10px] text-slate-500 mt-1 flex items-center justify-between">
-                  <span>{parcel.tehsil}</span>
-                  <span className="font-mono text-slate-400">
-                    {Number(parcel.resolved_area_sqm).toLocaleString()} sqm
-                  </span>
+                <div className="text-[11px] text-slate-500 truncate mt-0.5">
+                  Owner: <span className="text-slate-800 font-medium">{parcel.resolved_owner}</span>
                 </div>
               </div>
             );
@@ -150,280 +127,96 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
         </div>
       </div>
 
-      {/* Right Column: Parcel Master Record Inspector */}
-      <div className="flex-1 overflow-y-auto p-6 bg-slate-950">
-        {activeParcel ? (
-          <div className="max-w-4xl mx-auto space-y-5">
-            {/* Header Title */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="text-xl font-extrabold text-white">
-                    Parcel {activeParcel.parcel_id}
-                  </h1>
-                  <span className="bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                    Single Source of Truth
-                  </span>
-                  {activeParcel.conflict_summary?.has_conflicts && (
-                    <span className="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                      <AlertTriangle className="w-3 h-3" />
-                      <span>Conflicts Resolved</span>
-                    </span>
-                  )}
-                </div>
-                <p className="text-xs text-slate-400 mt-1 flex items-center gap-3">
-                  <span>Khasra No: <strong className="text-slate-200">{activeParcel.khasra_no}</strong></span>
-                  <span>Khata No: <strong className="text-slate-200">{activeParcel.khata_no}</strong></span>
-                  <span>Tehsil: <strong className="text-amber-400">{activeParcel.tehsil}</strong></span>
-                  <span>District: <strong className="text-slate-200">{activeParcel.district}</strong></span>
-                </p>
-              </div>
-
-              <div className="text-right text-[11px] text-slate-400">
-                <span>Resolver: </span>
-                <span className="text-indigo-300 font-mono">
-                  {activeParcel.resolver_metadata?.resolver_name || 'SmartRuleConflictResolver'}
+      {/* Right Main Column: Consolidated SSOT Inspector */}
+      {activeParcel ? (
+        <div className="flex-1 flex flex-col h-full overflow-y-auto p-6 space-y-6">
+          {/* Header Bar */}
+          <div className="bg-[#fafaf7] border border-[#d2d2c8] rounded-2xl p-5 shadow-sm flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-3 mb-1">
+                <h1 className="text-xl font-black text-slate-900">
+                  Parcel Master: {activeParcel.parcel_id}
+                </h1>
+                <span className="text-xs bg-amber-100 border border-amber-300 text-amber-800 font-bold px-2.5 py-0.5 rounded-lg">
+                  Khasra #{activeParcel.khasra_no}
                 </span>
-                <div className="text-[10px] text-slate-500">
-                  Consolidated: {new Date(activeParcel.resolver_metadata?.consolidated_at || Date.now()).toLocaleDateString()}
-                </div>
-              </div>
-            </div>
-
-            {/* Resolved Attribute Highlight Cards */}
-            <div className="grid grid-cols-3 gap-4">
-              {/* Resolved Owner Card */}
-              <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-sm">
-                <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-300">
-                    <User className="w-4 h-4 text-indigo-400" />
-                    <span>Consolidated Owner</span>
-                  </span>
-                  {activeParcel.conflict_summary?.ownership?.conflict_detected && (
-                    <span className="text-[10px] text-amber-400 font-semibold bg-amber-400/10 px-1.5 py-0.5 rounded">
-                      Discrepancy
-                    </span>
-                  )}
-                </div>
-                <div className="text-base font-bold text-white mt-1">
-                  {activeParcel.resolved_owner}
-                </div>
-                <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
-                  {activeParcel.conflict_summary?.ownership?.explanation ||
-                    'Consistent owner name reported across all department registers.'}
-                </p>
-              </div>
-
-              {/* Resolved Land-Use Card */}
-              <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-sm">
-                <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-300">
-                    <Building className="w-4 h-4 text-emerald-400" />
-                    <span>Approved Land Use</span>
-                  </span>
-                  {activeParcel.conflict_summary?.land_use?.conflict_detected && (
-                    <span className="text-[10px] text-amber-400 font-semibold bg-amber-400/10 px-1.5 py-0.5 rounded">
-                      Discrepancy
-                    </span>
-                  )}
-                </div>
-                <div className="text-base font-bold text-white capitalize mt-1">
-                  {activeParcel.resolved_land_use}
-                </div>
-                <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
-                  {activeParcel.conflict_summary?.land_use?.explanation ||
-                    'Consistent land-use classification across contributing departments.'}
-                </p>
-              </div>
-
-              {/* Resolved Area Card */}
-              <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-4 shadow-sm">
-                <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-                  <span className="flex items-center gap-1.5 font-semibold text-slate-300">
-                    <Maximize2 className="w-4 h-4 text-sky-400" />
-                    <span>Cadastral Spatial Area</span>
-                  </span>
-                  {activeParcel.conflict_summary?.area?.conflict_detected && (
-                    <span className="text-[10px] text-amber-400 font-semibold bg-amber-400/10 px-1.5 py-0.5 rounded">
-                      Variance {activeParcel.conflict_summary.area.delta_sqm}m²
-                    </span>
-                  )}
-                </div>
-                <div className="text-base font-bold text-white font-mono mt-1">
-                  {Number(activeParcel.resolved_area_sqm).toLocaleString()} sqm
-                </div>
-                <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
-                  {activeParcel.conflict_summary?.area?.explanation ||
-                    'Consistent area records across cadastral survey and deeds.'}
-                </p>
-              </div>
-            </div>
-
-            {/* Departmental Comparison Matrix (The 5 Department Truth Table) */}
-            <div className="bg-slate-900/80 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
-              <div className="p-3.5 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
-                <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-indigo-400" />
-                  <span>5-Department Source Records Comparison Table</span>
-                </h3>
-                <span className="text-[11px] text-slate-400">
-                  Preserved source values without information loss (§10, §18)
+                <span className="text-xs bg-[#29cc39]/15 border border-[#29cc39]/30 text-[#1b7a21] font-bold px-2.5 py-0.5 rounded-lg">
+                  {activeParcel.tehsil}
                 </span>
               </div>
+              <p className="text-xs text-slate-500">
+                Consolidated Single Source of Truth record across 5 land management departments.
+              </p>
+            </div>
+          </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-950/80 text-slate-400 border-b border-slate-800">
-                    <tr>
-                      <th className="py-2.5 px-4 font-semibold">Government Department</th>
-                      <th className="py-2.5 px-4 font-semibold">Recorded Owner</th>
-                      <th className="py-2.5 px-4 font-semibold">Reported Land Use</th>
-                      <th className="py-2.5 px-4 font-semibold">Record Area (sqm)</th>
-                      <th className="py-2.5 px-4 font-semibold">Registration Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800/60 font-medium">
-                    {/* 1. Registration & Stamps */}
-                    <tr className="hover:bg-slate-800/30">
-                      <td className="py-2.5 px-4 text-slate-300 font-semibold flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-purple-400"></span>
-                        <span>Registration & Stamps</span>
-                      </td>
-                      <td className="py-2.5 px-4 text-white">
-                        {activeParcel.source_provenance?.registration_stamps?.owner_name || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-300 capitalize">
-                        {activeParcel.source_provenance?.registration_stamps?.purpose_of_use || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 font-mono text-slate-300">
-                        {activeParcel.source_provenance?.registration_stamps?.land_area_sqm || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-emerald-400 text-[11px]">
-                        {activeParcel.source_provenance?.registration_stamps?.registration_status || 'registered'}
-                      </td>
-                    </tr>
-
-                    {/* 2. Revenue Department */}
-                    <tr className="hover:bg-slate-800/30">
-                      <td className="py-2.5 px-4 text-slate-300 font-semibold flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-                        <span>Revenue Department</span>
-                      </td>
-                      <td className="py-2.5 px-4 text-white">
-                        {activeParcel.source_provenance?.revenue_department?.owner_name || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-300 capitalize">
-                        {activeParcel.source_provenance?.revenue_department?.purpose_of_use || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 font-mono text-slate-300">
-                        {activeParcel.source_provenance?.revenue_department?.land_area_sqm || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-400 text-[11px]">active</td>
-                    </tr>
-
-                    {/* 3. Urban Local Body (ULB) */}
-                    <tr className="hover:bg-slate-800/30">
-                      <td className="py-2.5 px-4 text-slate-300 font-semibold flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-blue-400"></span>
-                        <span>Urban Local Body (ULB)</span>
-                      </td>
-                      <td className="py-2.5 px-4 text-white">
-                        {activeParcel.source_provenance?.urban_local_body?.owner_name || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-300 capitalize">
-                        {activeParcel.source_provenance?.urban_local_body?.purpose_of_use || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 font-mono text-slate-300">
-                        {activeParcel.source_provenance?.urban_local_body?.land_area_sqm || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-400 text-[11px]">tax registered</td>
-                    </tr>
-
-                    {/* 4. Urban Development Authority (UDA) */}
-                    <tr className="hover:bg-slate-800/30">
-                      <td className="py-2.5 px-4 text-slate-300 font-semibold flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                        <span>Urban Development Authority</span>
-                      </td>
-                      <td className="py-2.5 px-4 text-white">
-                        {activeParcel.source_provenance?.urban_development_authority?.owner_name || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-white font-semibold capitalize">
-                        {activeParcel.source_provenance?.urban_development_authority?.purpose_of_use || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 font-mono text-slate-300">
-                        {activeParcel.source_provenance?.urban_development_authority?.land_area_sqm || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-400 text-[11px]">approved</td>
-                    </tr>
-
-                    {/* 5. Directorate of Land Records (DLR) */}
-                    <tr className="hover:bg-slate-800/30">
-                      <td className="py-2.5 px-4 text-slate-300 font-semibold flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                        <span>Directorate of Land Records</span>
-                      </td>
-                      <td className="py-2.5 px-4 text-white">
-                        {activeParcel.source_provenance?.directorate_land_records?.owner_name || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-300 capitalize">
-                        {activeParcel.source_provenance?.directorate_land_records?.purpose_of_use || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 font-mono text-slate-300">
-                        {activeParcel.source_provenance?.directorate_land_records?.land_area_sqm || 'N/A'}
-                      </td>
-                      <td className="py-2.5 px-4 text-slate-400 text-[11px]">cadastral record</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          {/* Quick Metrics Cards */}
+          <div className="grid grid-cols-4 gap-4">
+            <div className="bg-[#fafaf7] border border-[#d2d2c8] rounded-2xl p-4 shadow-sm">
+              <span className="text-slate-400 text-[11px] block font-semibold">Resolved Owner (SSOT)</span>
+              <span className="text-sm font-black text-slate-900 mt-1 block">{activeParcel.resolved_owner}</span>
             </div>
 
-            {/* Verified Physical Structures on this Parcel */}
-            <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-sm">
-              <h3 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2 flex items-center gap-2">
-                <Building className="w-4 h-4 text-indigo-400" />
-                <span>Verified Structures on Parcel ({activeParcel.verified_structures?.length || 0})</span>
-              </h3>
+            <div className="bg-[#fafaf7] border border-[#d2d2c8] rounded-2xl p-4 shadow-sm">
+              <span className="text-slate-400 text-[11px] block font-semibold">Total Area (sqm)</span>
+              <span className="text-sm font-black text-[#29cc39] mt-1 block">{activeParcel.resolved_area_sqm} sqm</span>
+            </div>
 
-              {activeParcel.verified_structures && activeParcel.verified_structures.length > 0 ? (
-                <div className="grid grid-cols-2 gap-3 mt-2">
-                  {activeParcel.verified_structures.map((s) => (
-                    <div
-                      key={s.structure_id}
-                      className="p-3 bg-slate-950 border border-slate-800 rounded-lg text-xs"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-slate-100">{s.structure_id}</span>
-                        <span className="text-[10px] bg-emerald-500/20 text-emerald-300 font-semibold px-2 py-0.5 rounded border border-emerald-500/30">
-                          {s.status}
+            <div className="bg-[#fafaf7] border border-[#d2d2c8] rounded-2xl p-4 shadow-sm">
+              <span className="text-slate-400 text-[11px] block font-semibold">Land Use Classification</span>
+              <span className="text-sm font-black text-indigo-700 mt-1 block capitalize">{activeParcel.resolved_land_use}</span>
+            </div>
+
+            <div className="bg-[#fafaf7] border border-[#d2d2c8] rounded-2xl p-4 shadow-sm">
+              <span className="text-slate-400 text-[11px] block font-semibold">Conflict Resolution Status</span>
+              <span className="text-sm font-black text-slate-900 mt-1 block">
+                {activeParcel.conflict_summary?.has_conflicts ? 'Rule Resolved' : 'No Conflicts'}
+              </span>
+            </div>
+          </div>
+
+          {/* Department Breakdown Table */}
+          <div className="bg-[#fafaf7] border border-[#d2d2c8] rounded-2xl p-5 shadow-sm space-y-3">
+            <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+              <Building className="w-4 h-4 text-[#29cc39]" />
+              <span>Multi-Department Records Alignment (5 Data Sources)</span>
+            </h3>
+
+            <div className="overflow-x-auto rounded-xl border border-[#e0e0d6]">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-[#efefea] text-slate-900 font-bold border-b border-[#e0e0d6]">
+                  <tr>
+                    <th className="p-3">Department Source</th>
+                    <th className="p-3">Recorded Owner</th>
+                    <th className="p-3">Recorded Area</th>
+                    <th className="p-3">Land Category</th>
+                    <th className="p-3">Discrepancy Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#e0e0d6]">
+                  {Object.entries(activeParcel.department_records || {}).map(([dept, rec]: [string, any]) => (
+                    <tr key={dept} className="hover:bg-white transition">
+                      <td className="p-3 font-bold uppercase text-slate-800">{dept.replace('_', ' ')}</td>
+                      <td className="p-3 font-semibold">{rec?.owner_name || rec?.owner || 'N/A'}</td>
+                      <td className="p-3 font-semibold">{rec?.area_sqm || rec?.registered_area_sqm || 'N/A'} sqm</td>
+                      <td className="p-3 capitalize">{rec?.land_use || rec?.category || 'N/A'}</td>
+                      <td className="p-3">
+                        <span className="text-[10px] bg-[#29cc39]/15 text-[#1b7a21] font-bold px-2 py-0.5 rounded">
+                          Aligned
                         </span>
-                      </div>
-                      <div className="text-slate-400 text-[11px] mt-1 capitalize">
-                        Class: <span className="text-slate-200">{s.class.replace('_', ' ')}</span>
-                      </div>
-                      <div className="text-slate-500 text-[10px] mt-0.5">
-                        Method:{' '}
-                        <span className="text-indigo-300">
-                          {s.verification_method || 'geoai'}
-                        </span>
-                      </div>
-                    </div>
+                      </td>
+                    </tr>
                   ))}
-                </div>
-              ) : (
-                <p className="text-xs text-slate-400 italic mt-1">
-                  No verified building structures currently mapped on this parcel.
-                </p>
-              )}
+                </tbody>
+              </table>
             </div>
           </div>
-        ) : (
-          <div className="py-20 text-center text-slate-400 text-sm">
-            Select a parcel from the left to inspect its Single Source of Truth record.
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="flex-1 flex items-center justify-center text-slate-400 text-xs font-semibold">
+          Select a parcel to inspect single source of truth records.
+        </div>
+      )}
     </div>
   );
 };

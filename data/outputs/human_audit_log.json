@@ -22,5 +22,17 @@
     "new_status": "locked_disputed",
     "timestamp": "2026-09-12T11:25:37.123448+00:00",
     "notes": "Severe encroachment confirmed by Lekhpal."
+  },
+  {
+    "event_id": "c18b75bf-650f-46ec-9146-1becc88a52da",
+    "action": "lock_disputed",
+    "structure_id": "STR-007",
+    "official_id": "official_alpha",
+    "official_name": "Ramesh Kumar",
+    "tehsil": "Tehsil-Alpha",
+    "previous_status": "disputed",
+    "new_status": "locked_disputed",
+    "timestamp": "2026-09-13T06:48:44.177000+00:00",
+    "notes": ""
   }
 ]

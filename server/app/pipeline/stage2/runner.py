@@ -92,8 +92,8 @@ def run_stage2(
     matched, unregistered = evaluate_municipal_matching(ai_gdf, mun_gdf)
 
     # 3. Export outputs
-    matched_path = export_structures_geojson(matched, matched_output_path, f"EPSG:{target_epsg}")
-    unregistered_path = export_structures_geojson(unregistered, unregistered_output_path, f"EPSG:{target_epsg}")
+    matched_path = export_structures_geojson(matched, matched_output_path, "EPSG:4326")
+    unregistered_path = export_structures_geojson(unregistered, unregistered_output_path, "EPSG:4326")
 
     logger.info("Stage 2 Municipal Matching completed successfully.")
     return matched_path, unregistered_path, matched, unregistered

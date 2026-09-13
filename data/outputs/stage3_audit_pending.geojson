@@ -3,8 +3,81 @@
   "crs": {
     "type": "name",
     "properties": {
-      "name": "EPSG:32644"
+      "name": "EPSG:4326"
     }
   },
-  "features": []
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              76.5231716781044,
+              0.0011725381022297662
+            ],
+            [
+              76.52478432576724,
+              0.0011725407031902904
+            ],
+            [
+              76.5247843223728,
+              0.002525472283777711
+            ],
+            [
+              76.52317167470875,
+              0.002525466681708887
+            ],
+            [
+              76.5231716781044,
+              0.0011725381022297662
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "structure_id": "STR-005",
+        "class": "residential_house",
+        "confidence": 0.89,
+        "source": "synthetic_ground_truth_fixture",
+        "verification_method": "geoai",
+        "processing_crs": "EPSG:32644",
+        "record_status": "synthetic",
+        "status": "audit_pending",
+        "stage2_reason": "Spatially intersects municipal building record MUN-BLD-005.",
+        "municipal_building_id": "MUN-BLD-005",
+        "municipal_record": {
+          "municipal_building_id": "MUN-BLD-005",
+          "structure_ref": "STR-005",
+          "building_status": "registered",
+          "building_use": "residential",
+          "source_department": "Urban Local Body / Municipal Corporation",
+          "source_authority": "Synthetic Meerut Nagar Nigam",
+          "record_status": "synthetic"
+        },
+        "parcel_id": "PAR-105",
+        "related_parcel_ids": [
+          "PAR-106"
+        ],
+        "overflow_measure": 15.0,
+        "configured_threshold": 10.0,
+        "reason": "Overflow on parcel PAR-105 and neighboring parcel(s) PAR-106 exceeds threshold (10.00 m) at 15.00 m, but remains below 2x threshold (20.00 m).",
+        "municipality_reference": "MUN-BLD-005",
+        "provenance": "geoai_pipeline",
+        "cadastral_record": {
+          "parcel_id": "PAR-105",
+          "khasra_no": "KHS-105",
+          "khata_no": "KHT-105",
+          "land_use": "residential",
+          "record_area_sqm": 82600.0,
+          "tehsil": "Tehsil-Beta",
+          "district": "Synthetic-District",
+          "source_department": "Directorate of Land Records / Cadastral System",
+          "source_system": "Synthetic Bhu-Naksha",
+          "record_status": "synthetic"
+        }
+      }
+    }
+  ]
 }

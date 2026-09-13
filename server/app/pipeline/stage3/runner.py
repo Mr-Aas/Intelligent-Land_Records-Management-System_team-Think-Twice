@@ -100,9 +100,9 @@ def run_stage3(
     )
 
     # 3. Export separate GeoJSON files for each branch
-    v_path = export_cadastral_records_geojson(verified, verified_output_path, f"EPSG:{target_epsg}")
-    a_path = export_cadastral_records_geojson(audit_pending, audit_pending_output_path, f"EPSG:{target_epsg}")
-    d_path = export_cadastral_records_geojson(disputed, disputed_output_path, f"EPSG:{target_epsg}")
+    v_path = export_cadastral_records_geojson(verified, verified_output_path, "EPSG:4326")
+    a_path = export_cadastral_records_geojson(audit_pending, audit_pending_output_path, "EPSG:4326")
+    d_path = export_cadastral_records_geojson(disputed, disputed_output_path, "EPSG:4326")
 
     logger.info("Stage 3 Cadastral Validation completed successfully.")
     return v_path, a_path, d_path, verified, audit_pending, disputed
