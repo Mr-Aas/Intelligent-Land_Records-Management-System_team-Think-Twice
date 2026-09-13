@@ -10,7 +10,7 @@ from __future__ import annotations
 from datetime import datetime
 from app.db.session import Base
 from geoalchemy2 import Geometry
-from sqlalchemy import Column, DateTime, Float, Index, Integer, String, Text
+from sqlalchemy import Column, DateTime, Float, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 
 
@@ -23,15 +23,11 @@ class CadastralParcelDB(Base):
     khasra_no = Column(String(64), nullable=False, index=True)
     khata_no = Column(String(64), nullable=True)
     tehsil = Column(String(128), nullable=False, index=True)
-    district = Column(String(128), nullable=False, default="Meerut District")
+    district = Column(String(128), nullable=False, default="Kumaon District")
     land_use = Column(String(128), nullable=True)
     record_area_sqm = Column(Float, nullable=True)
-    geom = Column(Geometry(geometry_type="POLYGON", srid=4326), nullable=True)
+    geom = Column(Geometry(geometry_type="POLYGON", srid=4326, spatial_index=True), nullable=True)
     properties = Column(JSONB, nullable=True)
-
-    __table_args__ = (
-        Index("idx_cadastral_parcels_geom", "geom", postgresql_using="gist"),
-    )
 
 
 class MunicipalBuildingDB(Base):
@@ -42,12 +38,8 @@ class MunicipalBuildingDB(Base):
     municipal_building_id = Column(String(64), primary_key=True, index=True)
     tehsil = Column(String(128), nullable=True, index=True)
     building_status = Column(String(64), nullable=False, default="registered")
-    geom = Column(Geometry(geometry_type="POLYGON", srid=4326), nullable=True)
+    geom = Column(Geometry(geometry_type="POLYGON", srid=4326, spatial_index=True), nullable=True)
     properties = Column(JSONB, nullable=True)
-
-    __table_args__ = (
-        Index("idx_municipal_buildings_geom", "geom", postgresql_using="gist"),
-    )
 
 
 class AIExtractedStructureDB(Base):
@@ -59,12 +51,8 @@ class AIExtractedStructureDB(Base):
     class_name = Column(String(64), nullable=False, default="building")
     confidence = Column(Float, nullable=True)
     source_tile = Column(String(128), nullable=True)
-    geom = Column(Geometry(geometry_type="POLYGON", srid=4326), nullable=True)
+    geom = Column(Geometry(geometry_type="POLYGON", srid=4326, spatial_index=True), nullable=True)
     properties = Column(JSONB, nullable=True)
-
-    __table_args__ = (
-        Index("idx_ai_extracted_structures_geom", "geom", postgresql_using="gist"),
-    )
 
 
 class StructureVerificationDB(Base):
@@ -80,13 +68,9 @@ class StructureVerificationDB(Base):
     threshold = Column(Float, nullable=True)
     reason = Column(Text, nullable=True)
     tehsil = Column(String(128), nullable=True, index=True)
-    geom = Column(Geometry(geometry_type="POLYGON", srid=4326), nullable=True)
+    geom = Column(Geometry(geometry_type="POLYGON", srid=4326, spatial_index=True), nullable=True)
     properties = Column(JSONB, nullable=True)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-    __table_args__ = (
-        Index("idx_structure_verifications_geom", "geom", postgresql_using="gist"),
-    )
 
 
 class HumanAuditLogDB(Base):
@@ -136,9 +120,5 @@ class ConsolidatedParcelDB(Base):
     conflict_summary = Column(JSONB, nullable=True)
     source_provenance = Column(JSONB, nullable=True)
     department_records = Column(JSONB, nullable=True)
-    geom = Column(Geometry(geometry_type="POLYGON", srid=4326), nullable=True)
+    geom = Column(Geometry(geometry_type="POLYGON", srid=4326, spatial_index=True), nullable=True)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-    __table_args__ = (
-        Index("idx_consolidated_parcels_geom", "geom", postgresql_using="gist"),
-    )

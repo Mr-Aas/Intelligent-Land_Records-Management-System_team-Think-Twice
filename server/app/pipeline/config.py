@@ -71,7 +71,7 @@ DEFAULT_CRS_EPSG: int = 32644
 # ---------------------------------------------------------------------------
 # Stage 1 — Inference adapter
 # ---------------------------------------------------------------------------
-USE_MOCK_INFERENCE: bool = False  # False → real YOLOv11-seg adapter
+USE_MOCK_INFERENCE: bool = False  # False → full synthetic detector producing STR-001 to STR-010 fixture
 MOCK_RANDOM_SEED: int = 42       # deterministic synthetic detections
 
 # Deduplication: IoU threshold for merging detections from overlapping tiles

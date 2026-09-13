@@ -22,6 +22,7 @@ from app.pipeline.human_verification import service as hv_service
 from app.pipeline.stage4 import runner as stage4_runner
 from app.db import session as db_session
 from app.db import sync as db_sync
+from app.geoserver import setup as gs_setup
 from pyproj import Transformer
 from shapely.geometry import mapping, shape
 from shapely.ops import transform as shapely_transform
@@ -110,6 +111,27 @@ def trigger_db_sync():
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=result.get("message", "Database synchronization failed."),
         )
+    return result
+
+
+# ---------------------------------------------------------------------------
+# GeoServer OGC WMS/WFS Management Endpoints (§14, §15)
+# ---------------------------------------------------------------------------
+@router.get("/geoserver/status")
+def get_geoserver_status():
+    """Check GeoServer container readiness and OGC capabilities URLs."""
+    is_online, message, capabilities = gs_setup.check_geoserver_status()
+    return {
+        "status": "online" if is_online else "offline",
+        "message": message,
+        "capabilities": capabilities,
+    }
+
+
+@router.post("/geoserver/setup")
+def trigger_geoserver_setup():
+    """Trigger automated GeoServer REST configuration, workspace, datastore, and layer publishing."""
+    result = gs_setup.setup_geoserver()
     return result
 
 

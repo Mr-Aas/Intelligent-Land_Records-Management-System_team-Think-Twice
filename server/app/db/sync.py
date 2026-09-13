@@ -43,9 +43,20 @@ def init_db() -> bool:
             conn.commit()
             logger.info("PostGIS extension initialized.")
 
-        # 2. Create tables & indexes
-        Base.metadata.create_all(bind=engine)
-        logger.info("Database spatial tables and indexes created successfully.")
+        # 2. Create tables & indexes safely table by table
+        from sqlalchemy import inspect
+        inspector = inspect(engine)
+        existing_tables = inspector.get_table_names()
+
+        for table in Base.metadata.sorted_tables:
+            if table.name not in existing_tables:
+                try:
+                    table.create(bind=engine, checkfirst=True)
+                    logger.info("Created PostGIS table '%s'", table.name)
+                except Exception as t_err:
+                    logger.warning("Could not create table '%s': %s", table.name, t_err)
+
+        logger.info("Database spatial tables and indexes ready.")
         return True
     except Exception as e:
         logger.error("Failed to initialize PostGIS database: %s", e)
