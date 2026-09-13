@@ -40,7 +40,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.610379+00:00"
     }
   },
   {
@@ -52,18 +52,8 @@
     "resolved_owner": "Owner_A",
     "resolved_land_use": "residential",
     "resolved_area_sqm": 89600.0,
-    "verified_structures_count": 1,
-    "verified_structures": [
-      {
-        "structure_id": "STR-002",
-        "class": "residential_house",
-        "status": "verified",
-        "verification_method": "geoai",
-        "confidence": 0.91,
-        "municipal_building_id": "MUN-BLD-002",
-        "human_verification": null
-      }
-    ],
+    "verified_structures_count": 0,
+    "verified_structures": [],
     "conflict_summary": {
       "has_conflicts": true,
       "conflicting_fields": [
@@ -175,7 +165,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.610379+00:00"
     }
   },
   {
@@ -187,18 +177,8 @@
     "resolved_owner": "Owner_B",
     "resolved_land_use": "residential",
     "resolved_area_sqm": 70000.0,
-    "verified_structures_count": 1,
-    "verified_structures": [
-      {
-        "structure_id": "STR-003",
-        "class": "building",
-        "status": "verified",
-        "verification_method": "geoai",
-        "confidence": 0.96,
-        "municipal_building_id": "MUN-BLD-003",
-        "human_verification": null
-      }
-    ],
+    "verified_structures_count": 0,
+    "verified_structures": [],
     "conflict_summary": {
       "has_conflicts": true,
       "conflicting_fields": [
@@ -310,7 +290,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.610379+00:00"
     }
   },
   {
@@ -322,18 +302,8 @@
     "resolved_owner": "Owner_C_Registered",
     "resolved_land_use": "commercial",
     "resolved_area_sqm": 85400.0,
-    "verified_structures_count": 1,
-    "verified_structures": [
-      {
-        "structure_id": "STR-004",
-        "class": "building",
-        "status": "verified",
-        "verification_method": "geoai",
-        "confidence": 0.93,
-        "municipal_building_id": "MUN-BLD-004",
-        "human_verification": null
-      }
-    ],
+    "verified_structures_count": 0,
+    "verified_structures": [],
     "conflict_summary": {
       "has_conflicts": true,
       "conflicting_fields": [
@@ -446,7 +416,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.610379+00:00"
     }
   },
   {
@@ -591,7 +561,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.610379+00:00"
     }
   },
   {
@@ -717,7 +687,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.610379+00:00"
     }
   },
   {
@@ -840,7 +810,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.611380+00:00"
     }
   },
   {
@@ -962,7 +932,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.611380+00:00"
     }
   },
   {
@@ -974,18 +944,8 @@
     "resolved_owner": "Owner_H",
     "resolved_land_use": "residential",
     "resolved_area_sqm": 75400.0,
-    "verified_structures_count": 1,
-    "verified_structures": [
-      {
-        "structure_id": "STR-008",
-        "class": "residential_house",
-        "status": "verified",
-        "verification_method": "geoai",
-        "confidence": 0.95,
-        "municipal_building_id": "MUN-BLD-008",
-        "human_verification": null
-      }
-    ],
+    "verified_structures_count": 0,
+    "verified_structures": [],
     "conflict_summary": {
       "has_conflicts": true,
       "conflicting_fields": [
@@ -1097,7 +1057,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.611380+00:00"
     }
   },
   {
@@ -1109,18 +1069,8 @@
     "resolved_owner": "Owner_I",
     "resolved_land_use": "commercial",
     "resolved_area_sqm": 87000.0,
-    "verified_structures_count": 1,
-    "verified_structures": [
-      {
-        "structure_id": "STR-009",
-        "class": "building",
-        "status": "verified",
-        "verification_method": "geoai",
-        "confidence": 0.88,
-        "municipal_building_id": "MUN-BLD-009",
-        "human_verification": null
-      }
-    ],
+    "verified_structures_count": 0,
+    "verified_structures": [],
     "conflict_summary": {
       "has_conflicts": true,
       "conflicting_fields": [
@@ -1232,7 +1182,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.611380+00:00"
     }
   },
   {
@@ -1244,18 +1194,8 @@
     "resolved_owner": "Owner_J",
     "resolved_land_use": "residential",
     "resolved_area_sqm": 87000.0,
-    "verified_structures_count": 1,
-    "verified_structures": [
-      {
-        "structure_id": "STR-010",
-        "class": "residential_house",
-        "status": "verified",
-        "verification_method": "geoai",
-        "confidence": 0.97,
-        "municipal_building_id": "MUN-BLD-010",
-        "human_verification": null
-      }
-    ],
+    "verified_structures_count": 0,
+    "verified_structures": [],
     "conflict_summary": {
       "has_conflicts": false,
       "conflicting_fields": [],
@@ -1365,7 +1305,7 @@
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-12T11:25:37.145130+00:00"
+      "consolidated_at": "2026-09-13T04:29:50.611380+00:00"
     }
   }
 ]

@@ -20,8 +20,36 @@ from pydantic import BaseModel, Field
 from app.pipeline import config
 from app.pipeline.human_verification import service as hv_service
 from app.pipeline.stage4 import runner as stage4_runner
+from pyproj import Transformer
+from shapely.geometry import mapping, shape
+from shapely.ops import transform as shapely_transform
 
 router = APIRouter(prefix="/api")
+
+_wgs84_transformer = Transformer.from_crs("EPSG:32644", "EPSG:4326", always_xy=True)
+
+
+def _ensure_wgs84_feature(feat: Dict[str, Any]) -> Dict[str, Any]:
+    """Ensure geometry coordinates are in standard WGS84 (EPSG:4326) for Leaflet rendering."""
+    if not feat or "geometry" not in feat or not feat["geometry"]:
+        return feat
+    try:
+        geom = shape(feat["geometry"])
+        if geom.is_empty:
+            return feat
+        coords = None
+        if geom.geom_type == "Polygon":
+            coords = list(geom.exterior.coords)
+        elif geom.geom_type == "MultiPolygon" and len(geom.geoms) > 0:
+            coords = list(geom.geoms[0].exterior.coords)
+        if coords and (abs(coords[0][0]) > 180 or abs(coords[0][1]) > 90):
+            wgs_geom = shapely_transform(_wgs84_transformer.transform, geom)
+            feat = dict(feat)
+            feat["geometry"] = mapping(wgs_geom)
+    except Exception:
+        pass
+    return feat
+
 
 
 # ---------------------------------------------------------------------------

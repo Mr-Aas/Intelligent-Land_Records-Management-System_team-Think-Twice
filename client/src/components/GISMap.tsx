@@ -100,16 +100,16 @@ export const GISMap: React.FC<GISMapProps> = ({
     }
 
     return {
-      color: isSelected ? '#ffffff' : color,
-      weight: isSelected ? 3.5 : 2,
+      color: isSelected ? '#22a229' : color,
+      weight: isSelected ? 3.5 : 2.5,
       opacity: 1.0,
       fillColor,
-      fillOpacity: isSelected ? 0.6 : 0.35,
+      fillOpacity: 0, // outlined only — no fill per §5 requirement
     };
   };
 
   return (
-    <div className="relative flex-1 h-full w-full bg-slate-950 overflow-hidden">
+    <div className="relative flex-1 h-full w-full bg-slate-800 overflow-hidden">
       <MapContainer
         center={defaultCenter}
         zoom={16}
