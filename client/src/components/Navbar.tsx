@@ -58,20 +58,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           )}
 
-          <div className="bg-[#29cc39] p-2 rounded-xl text-white shadow-md shadow-[#29cc39]/20 flex items-center justify-center">
+          <div className="bg-[#29cc39] p-2 rounded-xl text-white shadow-md shadow-[#29cc39]/20 flex items-center justify-center ">
             <Layers className="w-5 h-5" />
           </div>
 
           <div>
-            <h1 className="text-base font-black tracking-tight text-slate-900 flex items-center gap-2">
+            <h1 className="text-base font-black tracking-tight text-slate-900 flex flex-col items-center gap-2">
               GIS AutoPilot
               <span className="text-xs bg-[#29cc39]/15 text-[#1b7a21] font-bold px-2 py-0.5 rounded-md border border-[#29cc39]/30">
                 GeoAI + Multi-Dept SSOT
               </span>
             </h1>
-            <p className="text-xs text-slate-500 font-medium">
-              Automated Feature Extraction & Cadastral Dispute Resolution
-            </p>
           </div>
         </div>
 

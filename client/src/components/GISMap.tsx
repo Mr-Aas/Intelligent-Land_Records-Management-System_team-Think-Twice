@@ -127,12 +127,17 @@ export const GISMap: React.FC<GISMapProps> = ({
         className="w-full h-full z-10"
         zoomControl={false}
       >
-        <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
-          url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-          maxZoom={20}
-        />
+{/* <TileLayer
+  attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+  url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+  maxZoom={17}
+/> */}
 
+<TileLayer
+  attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+  maxZoom={24}
+/>
         <MapController selectedFeature={selectedFeature} />
 
         {/* 1. Cadastral Parcels Layer */}

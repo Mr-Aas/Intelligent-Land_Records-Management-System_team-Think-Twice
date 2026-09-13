@@ -6,7 +6,19 @@ synthetic data is ready.  Every configurable value lives here so the rest
 of the codebase never contains unexplained literals.
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# ---------------------------------------------------------------------------
+# Database Configuration (§12 — PostgreSQL + PostGIS)
+# ---------------------------------------------------------------------------
+print(os.getenv("DATABASE_URL"))
+DATABASE_URL: str = os.getenv(
+    "DATABASE_URL"
+)
 
 # ---------------------------------------------------------------------------
 # Paths  (PLACEHOLDERS — update when synthetic data is available)

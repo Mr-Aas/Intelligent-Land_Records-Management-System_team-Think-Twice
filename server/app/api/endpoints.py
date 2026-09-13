@@ -20,6 +20,8 @@ from pydantic import BaseModel, Field
 from app.pipeline import config
 from app.pipeline.human_verification import service as hv_service
 from app.pipeline.stage4 import runner as stage4_runner
+from app.db import session as db_session
+from app.db import sync as db_sync
 from pyproj import Transformer
 from shapely.geometry import mapping, shape
 from shapely.ops import transform as shapely_transform
@@ -53,10 +55,69 @@ def _ensure_wgs84_feature(feat: Dict[str, Any]) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# Database & PostGIS Management Endpoints (§12)
+# ---------------------------------------------------------------------------
+@router.get("/db/status")
+def get_db_status():
+    """Check PostgreSQL connection, PostGIS extension status, and table record metrics."""
+    connected, message = db_session.check_db_connection()
+    postgis_version = db_session.get_postgis_version() if connected else None
+
+    table_counts = {}
+    if connected:
+        try:
+            from app.db.models import (
+                CadastralParcelDB,
+                MunicipalBuildingDB,
+                AIExtractedStructureDB,
+                StructureVerificationDB,
+                HumanAuditLogDB,
+                OfficialDB,
+                ConsolidatedParcelDB,
+            )
+            SessionLocal = db_session.get_session_factory()
+            db = SessionLocal()
+            table_counts = {
+                "cadastral_parcels": db.query(CadastralParcelDB).count(),
+                "municipal_buildings": db.query(MunicipalBuildingDB).count(),
+                "ai_extracted_structures": db.query(AIExtractedStructureDB).count(),
+                "structure_verifications": db.query(StructureVerificationDB).count(),
+                "human_audit_log": db.query(HumanAuditLogDB).count(),
+                "officials": db.query(OfficialDB).count(),
+                "consolidated_parcels": db.query(ConsolidatedParcelDB).count(),
+            }
+            db.close()
+        except Exception as e:
+            table_counts = {"error": str(e)}
+
+    return {
+        "status": "online" if connected else "offline",
+        "database_url": config.DATABASE_URL.split("@")[-1] if "@" in config.DATABASE_URL else config.DATABASE_URL,
+        "connected": connected,
+        "message": message,
+        "postgis_enabled": postgis_version is not None,
+        "postgis_version": postgis_version,
+        "table_counts": table_counts,
+    }
+
+
+@router.post("/db/sync")
+def trigger_db_sync():
+    """Trigger PostGIS database table creation and pipeline data synchronization."""
+    result = db_sync.sync_all_to_db()
+    if result.get("status") == "error":
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=result.get("message", "Database synchronization failed."),
+        )
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Request / Response Schemas
 # ---------------------------------------------------------------------------
 class LoginRequest(BaseModel):
-    username: str = Field(..., description="Synthetic username (e.g. 'official_alpha')")
+    username: str = Field(..., description="username (e.g. 'official_ramesh')")
     password: str = Field(..., description="Password (e.g. 'password123')")
 
 
