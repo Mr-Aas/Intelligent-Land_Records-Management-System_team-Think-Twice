@@ -29,7 +29,7 @@ from shapely.ops import transform as shapely_transform
 
 router = APIRouter(prefix="/api")
 
-_wgs84_transformer = Transformer.from_crs("EPSG:32644", "EPSG:4326", always_xy=True)
+_wgs84_transformer = Transformer.from_crs("EPSG:32643", "EPSG:4326", always_xy=True)
 
 
 def _ensure_wgs84_feature(feat: Dict[str, Any]) -> Dict[str, Any]:
@@ -203,6 +203,9 @@ def perform_human_action(payload: HumanActionRequest):
     Perform a human decision action (§8):
     - `mark_verified`: Transition to `verified`, eligible for Stage 4.
     - `lock_disputed`: Transition to `locked_disputed`, frozen and excluded from Stage 4.
+    - `forward_to_revenue`: Lekhpal forwards to Revenue Inspector.
+    - `forward_to_tehsildar`: Revenue Inspector forwards to Tehsildar.
+    - `tehsildar_commit`: Tehsildar commits final approval to PostGIS DB.
     """
     try:
         if payload.action == "mark_verified":
@@ -213,6 +216,24 @@ def perform_human_action(payload: HumanActionRequest):
             )
         elif payload.action == "lock_disputed":
             feature = hv_service.lock_disputed(
+                structure_id=payload.structure_id,
+                official_id=payload.official_id,
+                notes=payload.notes,
+            )
+        elif payload.action == "forward_to_revenue":
+            feature = hv_service.forward_to_revenue(
+                structure_id=payload.structure_id,
+                official_id=payload.official_id,
+                notes=payload.notes,
+            )
+        elif payload.action == "forward_to_tehsildar":
+            feature = hv_service.forward_to_tehsildar(
+                structure_id=payload.structure_id,
+                official_id=payload.official_id,
+                notes=payload.notes,
+            )
+        elif payload.action == "tehsildar_commit":
+            feature = hv_service.tehsildar_commit(
                 structure_id=payload.structure_id,
                 official_id=payload.official_id,
                 notes=payload.notes,
@@ -235,8 +256,10 @@ def perform_human_action(payload: HumanActionRequest):
 
 
 @router.get("/human-verification/audit-log")
-def get_audit_log():
-    """Retrieve full append-only audit trail of human actions."""
+def get_audit_log(
+    official_id: Optional[str] = Query(None, description="Filter audit logs by official's assigned tehsil")
+):
+    """Retrieve append-only audit trail of human actions (filtered by official's tehsil if official_id is provided)."""
     path = Path(config.HUMAN_AUDIT_LOG_PATH)
     if not path.exists():
         return {"status": "success", "count": 0, "entries": []}
@@ -245,6 +268,13 @@ def get_audit_log():
             entries = json.load(f)
         except json.JSONDecodeError:
             entries = []
+
+    if official_id:
+        official = hv_service.get_official(official_id)
+        if official and official.get("tehsil"):
+            tehsil = official["tehsil"]
+            entries = [e for e in entries if e.get("tehsil") == tehsil]
+
     return {"status": "success", "count": len(entries), "entries": entries}
 
 
@@ -403,9 +433,11 @@ def get_review_structures_layer():
                 if sid:
                     structures[sid] = feat
 
+    normalized_features = [_ensure_wgs84_feature(feat) for feat in structures.values()]
+
     return {
         "type": "FeatureCollection",
         "name": "review_structures_layer",
-        "features": list(structures.values()),
+        "features": normalized_features,
     }
 

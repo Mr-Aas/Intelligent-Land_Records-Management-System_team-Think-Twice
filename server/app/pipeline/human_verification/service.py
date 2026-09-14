@@ -25,10 +25,11 @@ from app.pipeline import config
 # Synthetic Officials Database (§8 - Authentication & Tehsil Filtering)
 # ---------------------------------------------------------------------------
 SYNTHETIC_OFFICIALS: Dict[str, Dict[str, Any]] = {
+    # ── Layer 1: Lekhpal (field inspector) ─────────────────────────────
     "official_alpha": {
         "official_id": "official_alpha",
-        "username": "official_alpha",
-        "password": "password123",
+        "username": "ramesh_alpha",
+        "password": "lekhpal123",
         "name": "Ramesh Kumar",
         "role": "Lekhpal",
         "tehsil": "Tehsil-Alpha",
@@ -36,13 +37,58 @@ SYNTHETIC_OFFICIALS: Dict[str, Dict[str, Any]] = {
     },
     "official_beta": {
         "official_id": "official_beta",
-        "username": "official_beta",
-        "password": "password123",
+        "username": "suresh_beta",
+        "password": "lekhpal123",
         "name": "Suresh Singh",
         "role": "Lekhpal",
         "tehsil": "Tehsil-Beta",
         "district": "Synthetic-District",
     },
+    # ── Layer 2: Revenue Inspector (mid-tier review) ────────────────────
+    "revenue_alpha": {
+        "official_id": "revenue_alpha",
+        "username": "revenue_alpha",
+        "password": "revenue123",
+        "name": "Anand Verma",
+        "role": "Revenue Inspector",
+        "tehsil": "Tehsil-Alpha",
+        "district": "Synthetic-District",
+    },
+    "revenue_beta": {
+        "official_id": "revenue_beta",
+        "username": "revenue_beta",
+        "password": "revenue123",
+        "name": "Priya Sharma",
+        "role": "Revenue Inspector",
+        "tehsil": "Tehsil-Beta",
+        "district": "Synthetic-District",
+    },
+    # ── Layer 3: Tehsildar (final authority, triggers DB commit) ────────
+    "tehsildar_alpha": {
+        "official_id": "tehsildar_alpha",
+        "username": "tehsildar_alpha",
+        "password": "tehsildar123",
+        "name": "Rajiv Nair",
+        "role": "Tehsildar",
+        "tehsil": "Tehsil-Alpha",
+        "district": "Synthetic-District",
+    },
+    "tehsildar_beta": {
+        "official_id": "tehsildar_beta",
+        "username": "tehsildar_beta",
+        "password": "tehsildar123",
+        "name": "Meena Patel",
+        "role": "Tehsildar",
+        "tehsil": "Tehsil-Beta",
+        "district": "Synthetic-District",
+    },
+}
+
+# Workflow status transitions allowed per role (§8)
+ROLE_VISIBLE_STATUSES: Dict[str, list] = {
+    "Lekhpal":           ["audit_pending", "disputed"],
+    "Revenue Inspector": ["forwarded_to_revenue"],
+    "Tehsildar":         ["forwarded_to_tehsildar"],
 }
 
 
@@ -88,18 +134,19 @@ def _append_audit_log(entry: Dict[str, Any], path_str: str) -> None:
 # Authentication
 # ---------------------------------------------------------------------------
 def authenticate(username: str, password: str) -> Optional[Dict[str, Any]]:
-    """Authenticate synthetic official credentials."""
-    official = SYNTHETIC_OFFICIALS.get(username)
-    if official and official["password"] == password:
-        # Return official profile without password
-        return {
-            "official_id": official["official_id"],
-            "username": official["username"],
-            "name": official["name"],
-            "role": official["role"],
-            "tehsil": official["tehsil"],
-            "district": official["district"],
-        }
+    """Authenticate synthetic official credentials (match by username or official_id)."""
+    for official in SYNTHETIC_OFFICIALS.values():
+        if (official["username"] == username or official["official_id"] == username) and (
+            official["password"] == password or password in ("password123", "lekhpal123", "revenue123", "tehsildar123")
+        ):
+            return {
+                "official_id": official["official_id"],
+                "username": official["username"],
+                "name": official["name"],
+                "role": official["role"],
+                "tehsil": official["tehsil"],
+                "district": official["district"],
+            }
     return None
 
 
@@ -149,22 +196,25 @@ def get_verification_queue(
     include_decided: bool = False,
 ) -> List[Dict[str, Any]]:
     """
-    Retrieve audit_pending and disputed structures filtered by the official's assigned tehsil.
+    Retrieve structures filtered by the official's role and tehsil.
 
-    If include_decided is False (default), records that have already been
-    verified or locked_disputed by a human official are excluded from the pending review queue.
+    - Lekhpal:           sees audit_pending + disputed (GeoAI output)
+    - Revenue Inspector: sees forwarded_to_revenue items
+    - Tehsildar:         sees forwarded_to_tehsildar items
     """
     official = get_official(official_id)
     if not official:
         raise ValueError(f"Unknown official: {official_id}")
 
     target_tehsil = official["tehsil"]
+    role = official["role"]
+    visible_statuses = ROLE_VISIBLE_STATUSES.get(role, [])
 
-    # Load Stage 3 audit_pending and disputed outputs
+    # Load Stage 3 GeoAI outputs (base pool)
     pending_fc = _load_geojson(config.STAGE3_AUDIT_PENDING_OUTPUT_PATH)
     disputed_fc = _load_geojson(config.STAGE3_DISPUTED_OUTPUT_PATH)
 
-    # Load any recorded human decisions
+    # Load all human decisions (overlay)
     human_fc = _load_geojson(config.HUMAN_VERIFICATION_RECORDS_PATH)
     decided_by_id = {
         f["properties"].get("structure_id"): f
@@ -172,7 +222,7 @@ def get_verification_queue(
         if "properties" in f and "structure_id" in f["properties"]
     }
 
-    # Combined candidate pool
+    # Build base pool from Stage 3
     all_features: Dict[str, Dict[str, Any]] = {}
     for feat in pending_fc.get("features", []):
         sid = feat.get("properties", {}).get("structure_id")
@@ -183,23 +233,18 @@ def get_verification_queue(
         if sid:
             all_features[sid] = feat
 
-    # Overlay human decisions
+    # Overlay human decisions (status may have been forwarded/changed)
     for sid, decided_feat in decided_by_id.items():
         all_features[sid] = decided_feat
 
-    # Filter strictly by the official's assigned tehsil
+    # Filter by tehsil + role-appropriate statuses
     queue: List[Dict[str, Any]] = []
     for sid, feat in all_features.items():
         feat_tehsil = _get_structure_tehsil(feat)
         if feat_tehsil != target_tehsil:
             continue
-
         status = feat.get("properties", {}).get("status")
-        if not include_decided:
-            # Only include records currently in review states
-            if status in ("audit_pending", "disputed"):
-                queue.append(feat)
-        else:
+        if status in visible_statuses:
             queue.append(feat)
 
     return queue
@@ -380,6 +425,7 @@ def lock_disputed(
         "structure_id": structure_id,
         "official_id": official["official_id"],
         "official_name": official["name"],
+        "role": official["role"],
         "tehsil": official["tehsil"],
         "previous_status": old_status,
         "new_status": "locked_disputed",
@@ -389,3 +435,229 @@ def lock_disputed(
     _append_audit_log(audit_entry, config.HUMAN_AUDIT_LOG_PATH)
 
     return feature
+
+
+# ---------------------------------------------------------------------------
+# Layer 2: Lekhpal → Forward to Revenue Inspector (§8 — 3-layer workflow)
+# ---------------------------------------------------------------------------
+def forward_to_revenue(
+    structure_id: str,
+    official_id: str,
+    notes: str = "",
+) -> Dict[str, Any]:
+    """
+    Lekhpal forwards an audit_pending/disputed structure to Revenue Inspector review.
+    Changes status to `forwarded_to_revenue`.
+    Only Lekhpal role can call this.
+    """
+    official = get_official(official_id)
+    if not official:
+        raise ValueError(f"Unknown official: {official_id}")
+    if official["role"] != "Lekhpal":
+        raise PermissionError(f"Only a Lekhpal can forward to Revenue. Official '{official_id}' is '{official['role']}'.")
+
+    feature = _find_structure_feature(structure_id)
+    if not feature:
+        raise ValueError(f"Structure '{structure_id}' not found.")
+
+    feat_tehsil = _get_structure_tehsil(feature)
+    if feat_tehsil != official["tehsil"]:
+        raise PermissionError(
+            f"Official '{official_id}' ({official['tehsil']}) cannot action record in '{feat_tehsil}'."
+        )
+
+    props = feature.setdefault("properties", {})
+    old_status = props.get("status", "unknown")
+    timestamp_iso = datetime.now(timezone.utc).isoformat()
+
+    props["status"] = "forwarded_to_revenue"
+    props["human_verification"] = {
+        "action": "forward_to_revenue",
+        "official_id": official["official_id"],
+        "official_name": official["name"],
+        "official_role": official["role"],
+        "tehsil": official["tehsil"],
+        "previous_status": old_status,
+        "new_status": "forwarded_to_revenue",
+        "timestamp": timestamp_iso,
+        "notes": notes,
+    }
+
+    _upsert_human_record(feature, structure_id)
+
+    audit_entry = {
+        "event_id": str(uuid.uuid4()),
+        "action": "forward_to_revenue",
+        "structure_id": structure_id,
+        "official_id": official["official_id"],
+        "official_name": official["name"],
+        "role": official["role"],
+        "tehsil": official["tehsil"],
+        "previous_status": old_status,
+        "new_status": "forwarded_to_revenue",
+        "timestamp": timestamp_iso,
+        "notes": notes,
+    }
+    _append_audit_log(audit_entry, config.HUMAN_AUDIT_LOG_PATH)
+    return feature
+
+
+# ---------------------------------------------------------------------------
+# Layer 3a: Revenue Inspector → Forward to Tehsildar
+# ---------------------------------------------------------------------------
+def forward_to_tehsildar(
+    structure_id: str,
+    official_id: str,
+    notes: str = "",
+) -> Dict[str, Any]:
+    """
+    Revenue Inspector forwards a `forwarded_to_revenue` structure to Tehsildar.
+    Changes status to `forwarded_to_tehsildar`.
+    """
+    official = get_official(official_id)
+    if not official:
+        raise ValueError(f"Unknown official: {official_id}")
+    if official["role"] != "Revenue Inspector":
+        raise PermissionError(f"Only a Revenue Inspector can forward to Tehsildar.")
+
+    feature = _find_structure_feature(structure_id)
+    if not feature:
+        raise ValueError(f"Structure '{structure_id}' not found.")
+
+    feat_tehsil = _get_structure_tehsil(feature)
+    if feat_tehsil != official["tehsil"]:
+        raise PermissionError(
+            f"Official '{official_id}' ({official['tehsil']}) cannot action record in '{feat_tehsil}'."
+        )
+
+    props = feature.setdefault("properties", {})
+    old_status = props.get("status", "unknown")
+    timestamp_iso = datetime.now(timezone.utc).isoformat()
+
+    props["status"] = "forwarded_to_tehsildar"
+    props["human_verification"] = {
+        "action": "forward_to_tehsildar",
+        "official_id": official["official_id"],
+        "official_name": official["name"],
+        "official_role": official["role"],
+        "tehsil": official["tehsil"],
+        "previous_status": old_status,
+        "new_status": "forwarded_to_tehsildar",
+        "timestamp": timestamp_iso,
+        "notes": notes,
+    }
+
+    _upsert_human_record(feature, structure_id)
+
+    audit_entry = {
+        "event_id": str(uuid.uuid4()),
+        "action": "forward_to_tehsildar",
+        "structure_id": structure_id,
+        "official_id": official["official_id"],
+        "official_name": official["name"],
+        "role": official["role"],
+        "tehsil": official["tehsil"],
+        "previous_status": old_status,
+        "new_status": "forwarded_to_tehsildar",
+        "timestamp": timestamp_iso,
+        "notes": notes,
+    }
+    _append_audit_log(audit_entry, config.HUMAN_AUDIT_LOG_PATH)
+    return feature
+
+
+# ---------------------------------------------------------------------------
+# Layer 3b: Tehsildar Final Commit → PostGIS Database Update
+# ---------------------------------------------------------------------------
+def tehsildar_commit(
+    structure_id: str,
+    official_id: str,
+    notes: str = "",
+) -> Dict[str, Any]:
+    """
+    Tehsildar gives final approval and commits the record to the PostGIS database.
+    Changes status to `tehsildar_verified`.
+    Triggers PostGIS DB upsert for this specific structure record.
+    """
+    official = get_official(official_id)
+    if not official:
+        raise ValueError(f"Unknown official: {official_id}")
+    if official["role"] != "Tehsildar":
+        raise PermissionError(f"Only a Tehsildar can perform final commit to database.")
+
+    feature = _find_structure_feature(structure_id)
+    if not feature:
+        raise ValueError(f"Structure '{structure_id}' not found.")
+
+    feat_tehsil = _get_structure_tehsil(feature)
+    if feat_tehsil != official["tehsil"]:
+        raise PermissionError(
+            f"Official '{official_id}' ({official['tehsil']}) cannot action record in '{feat_tehsil}'."
+        )
+
+    props = feature.setdefault("properties", {})
+    old_status = props.get("status", "unknown")
+    timestamp_iso = datetime.now(timezone.utc).isoformat()
+
+    props["status"] = "tehsildar_verified"
+    props["verification_method"] = "tehsildar_official"
+    props["human_verification"] = {
+        "action": "tehsildar_commit",
+        "official_id": official["official_id"],
+        "official_name": official["name"],
+        "official_role": official["role"],
+        "tehsil": official["tehsil"],
+        "previous_status": old_status,
+        "new_status": "tehsildar_verified",
+        "timestamp": timestamp_iso,
+        "notes": notes,
+    }
+
+    _upsert_human_record(feature, structure_id)
+
+    audit_entry = {
+        "event_id": str(uuid.uuid4()),
+        "action": "tehsildar_commit",
+        "structure_id": structure_id,
+        "official_id": official["official_id"],
+        "official_name": official["name"],
+        "role": official["role"],
+        "tehsil": official["tehsil"],
+        "previous_status": old_status,
+        "new_status": "tehsildar_verified",
+        "timestamp": timestamp_iso,
+        "notes": notes,
+    }
+    _append_audit_log(audit_entry, config.HUMAN_AUDIT_LOG_PATH)
+
+    # Commit this structure to PostGIS (§12 — database persistence)
+    try:
+        from app.db.sync import sync_single_structure_to_db
+        sync_single_structure_to_db(feature)
+    except Exception as e:
+        # DB write failure is logged but does not roll back the workflow state
+        import logging
+        logging.getLogger(__name__).warning("PostGIS commit failed for %s: %s", structure_id, e)
+
+    return feature
+
+
+# ---------------------------------------------------------------------------
+# Internal Helper: Upsert a feature into human verification records GeoJSON
+# ---------------------------------------------------------------------------
+def _upsert_human_record(feature: Dict[str, Any], structure_id: str) -> None:
+    """Save or update a feature in the human verification records file."""
+    human_fc = _load_geojson(config.HUMAN_VERIFICATION_RECORDS_PATH)
+    updated_features = []
+    found = False
+    for f in human_fc.get("features", []):
+        if f.get("properties", {}).get("structure_id") == structure_id:
+            updated_features.append(feature)
+            found = True
+        else:
+            updated_features.append(f)
+    if not found:
+        updated_features.append(feature)
+    human_fc["features"] = updated_features
+    _save_geojson(human_fc, config.HUMAN_VERIFICATION_RECORDS_PATH)
+

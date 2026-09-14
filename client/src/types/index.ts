@@ -14,7 +14,7 @@ export interface OfficialProfile {
 export interface StructureProperties {
   structure_id: string;
   class: string;
-  status: 'ai_extracted' | 'unregistered' | 'verified' | 'audit_pending' | 'disputed' | 'locked_disputed';
+  status: 'ai_extracted' | 'unregistered' | 'verified' | 'audit_pending' | 'disputed' | 'locked_disputed' | 'forwarded_to_revenue' | 'forwarded_to_tehsildar' | 'tehsildar_verified';
   verification_method?: string;
   confidence?: number;
   parcel_id?: string;

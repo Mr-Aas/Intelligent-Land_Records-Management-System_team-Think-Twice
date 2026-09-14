@@ -194,12 +194,12 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#e0e0d6]">
-                  {Object.entries(activeParcel.department_records || {}).map(([dept, rec]: [string, any]) => (
+                  {Object.entries(activeParcel.department_records || activeParcel.source_provenance || {}).map(([dept, rec]: [string, any]) => (
                     <tr key={dept} className="hover:bg-white transition">
-                      <td className="p-3 font-bold uppercase text-slate-800">{dept.replace('_', ' ')}</td>
-                      <td className="p-3 font-semibold">{rec?.owner_name || rec?.owner || 'N/A'}</td>
-                      <td className="p-3 font-semibold">{rec?.area_sqm || rec?.registered_area_sqm || 'N/A'} sqm</td>
-                      <td className="p-3 capitalize">{rec?.land_use || rec?.category || 'N/A'}</td>
+                      <td className="p-3 font-bold uppercase text-slate-800">{dept.replace(/_/g, ' ')}</td>
+                      <td className="p-3 font-semibold">{rec?.owner_name || rec?.cadastral_owner || rec?.revenue_owner || rec?.owner || 'N/A'}</td>
+                      <td className="p-3 font-semibold">{rec?.area_sqm || rec?.registered_area_sqm || rec?.record_area_sqm || 'N/A'} {rec?.area_sqm || rec?.registered_area_sqm || rec?.record_area_sqm ? 'sqm' : ''}</td>
+                      <td className="p-3 capitalize">{rec?.land_use || rec?.purpose_of_use || rec?.category || 'N/A'}</td>
                       <td className="p-3">
                         <span className="text-[10px] bg-[#29cc39]/15 text-[#1b7a21] font-bold px-2 py-0.5 rounded">
                           Aligned

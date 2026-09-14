@@ -134,6 +134,10 @@ class SmartRuleConflictResolver(ConflictResolver):
                 dept_name: record
                 for dept_name, record in department_records.items()
             },
+            "department_records": {
+                dept_name: record
+                for dept_name, record in department_records.items()
+            },
             # Resolver Metadata (§9, §23)
             "resolver_metadata": {
                 "resolver_name": self.RESOLVER_NAME,

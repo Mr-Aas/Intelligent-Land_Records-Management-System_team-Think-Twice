@@ -36,11 +36,12 @@
       }
     },
     "source_provenance": {},
+    "department_records": {},
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -171,11 +172,74 @@
         "cadastral_owner": "Owner_A"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-102",
+        "parcel_id": "PAR-102",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "89600",
+        "owner_name": "Owner_A",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_A",
+        "revenue_land_use": "residential"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-102",
+        "parcel_id": "PAR-102",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "89600",
+        "owner_name": "Owner_A",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-102",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-102",
+        "parcel_id": "PAR-102",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "90000",
+        "owner_name": "Owner_A",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-102",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-102",
+        "parcel_id": "PAR-102",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "89600",
+        "owner_name": "Owner_A",
+        "purpose_of_use": "residential",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-102",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-102",
+        "parcel_id": "PAR-102",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "89600.0",
+        "owner_name": "Owner_A",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-102",
+        "khata_no": "KHT-102",
+        "cadastral_owner": "Owner_A"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -306,11 +370,74 @@
         "cadastral_owner": "Owner_B"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-103",
+        "parcel_id": "PAR-103",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "70000",
+        "owner_name": "Owner_B",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_B",
+        "revenue_land_use": "residential"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-103",
+        "parcel_id": "PAR-103",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "70000",
+        "owner_name": "Owner_B",
+        "purpose_of_use": "mixed_use",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-103",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-103",
+        "parcel_id": "PAR-103",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "70000",
+        "owner_name": "Owner_B",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-103",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-103",
+        "parcel_id": "PAR-103",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "70000",
+        "owner_name": "Owner_B",
+        "purpose_of_use": "residential",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-103",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-103",
+        "parcel_id": "PAR-103",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "70000.0",
+        "owner_name": "Owner_B",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-103",
+        "khata_no": "KHT-103",
+        "cadastral_owner": "Owner_B"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -442,11 +569,74 @@
         "cadastral_owner": "Owner_C"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-104",
+        "parcel_id": "PAR-104",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "85400",
+        "owner_name": "Owner_C_Revenue",
+        "purpose_of_use": "mixed_use",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_C",
+        "revenue_land_use": "mixed_use"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-104",
+        "parcel_id": "PAR-104",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "85400",
+        "owner_name": "Owner_C",
+        "purpose_of_use": "mixed_use",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-104",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-104",
+        "parcel_id": "PAR-104",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "85400",
+        "owner_name": "Owner_C",
+        "purpose_of_use": "commercial",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-104",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-104",
+        "parcel_id": "PAR-104",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "85400",
+        "owner_name": "Owner_C_Registered",
+        "purpose_of_use": "mixed_use",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-104",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-104",
+        "parcel_id": "PAR-104",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "85400.0",
+        "owner_name": "Owner_C",
+        "purpose_of_use": "mixed_use",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-104",
+        "khata_no": "KHT-104",
+        "cadastral_owner": "Owner_C"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -587,11 +777,74 @@
         "cadastral_owner": "Owner_D"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-105",
+        "parcel_id": "PAR-105",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "74000",
+        "owner_name": "Owner_D",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_D",
+        "revenue_land_use": "residential"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-105",
+        "parcel_id": "PAR-105",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "73750",
+        "owner_name": "Owner_D",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-105",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-105",
+        "parcel_id": "PAR-105",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "73750",
+        "owner_name": "Owner_D",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-105",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-105",
+        "parcel_id": "PAR-105",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "73750",
+        "owner_name": "Owner_D",
+        "purpose_of_use": "residential",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-105",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-105",
+        "parcel_id": "PAR-105",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "82600.0",
+        "owner_name": "Owner_D",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-105",
+        "khata_no": "KHT-105",
+        "cadastral_owner": "Owner_D"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -713,11 +966,74 @@
         "cadastral_owner": "Owner_E"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-106",
+        "parcel_id": "PAR-106",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "93000",
+        "owner_name": "Owner_E",
+        "purpose_of_use": "industrial",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_E",
+        "revenue_land_use": "industrial"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-106",
+        "parcel_id": "PAR-106",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "93000",
+        "owner_name": "Owner_E_ULB",
+        "purpose_of_use": "industrial",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-106",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-106",
+        "parcel_id": "PAR-106",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "93000",
+        "owner_name": "Owner_E",
+        "purpose_of_use": "industrial",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-106",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-106",
+        "parcel_id": "PAR-106",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "93000",
+        "owner_name": "Owner_E",
+        "purpose_of_use": "industrial",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-106",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-106",
+        "parcel_id": "PAR-106",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "86800.0",
+        "owner_name": "Owner_E_Cadastral",
+        "purpose_of_use": "industrial",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-106",
+        "khata_no": "KHT-106",
+        "cadastral_owner": "Owner_E"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -836,11 +1152,74 @@
         "cadastral_owner": "Owner_F"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-107",
+        "parcel_id": "PAR-107",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "69600",
+        "owner_name": "Owner_F",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_F",
+        "revenue_land_use": "residential"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-107",
+        "parcel_id": "PAR-107",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "69600",
+        "owner_name": "Owner_F",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-107",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-107",
+        "parcel_id": "PAR-107",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "69600",
+        "owner_name": "Owner_F",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-107",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-107",
+        "parcel_id": "PAR-107",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "69600",
+        "owner_name": "Owner_F",
+        "purpose_of_use": "residential",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-107",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-107",
+        "parcel_id": "PAR-107",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "69600.0",
+        "owner_name": "Owner_F",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-107",
+        "khata_no": "KHT-107",
+        "cadastral_owner": "Owner_F"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -958,11 +1337,74 @@
         "cadastral_owner": "Owner_G"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-108",
+        "parcel_id": "PAR-108",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "46400",
+        "owner_name": "Owner_G",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_G",
+        "revenue_land_use": "residential"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-108",
+        "parcel_id": "PAR-108",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "46400",
+        "owner_name": "Owner_G",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-108",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-108",
+        "parcel_id": "PAR-108",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "46400",
+        "owner_name": "Owner_G",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-108",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-108",
+        "parcel_id": "PAR-108",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "46400",
+        "owner_name": "Owner_G",
+        "purpose_of_use": "",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-108",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-108",
+        "parcel_id": "PAR-108",
+        "tehsil": "Tehsil-Alpha",
+        "land_area_sqm": "46400.0",
+        "owner_name": "Owner_G",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-108",
+        "khata_no": "KHT-108",
+        "cadastral_owner": "Owner_G"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -1093,11 +1535,74 @@
         "cadastral_owner": "Owner_H"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-109",
+        "parcel_id": "PAR-109",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "72800",
+        "owner_name": "Owner_H",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_H",
+        "revenue_land_use": "residential"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-109",
+        "parcel_id": "PAR-109",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "72800",
+        "owner_name": "Owner_H",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-109",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-109",
+        "parcel_id": "PAR-109",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "72800",
+        "owner_name": "Owner_H",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-109",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-109",
+        "parcel_id": "PAR-109",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "72800",
+        "owner_name": "Owner_H",
+        "purpose_of_use": "residential",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-109",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-109",
+        "parcel_id": "PAR-109",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "75400.0",
+        "owner_name": "Owner_H",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-109",
+        "khata_no": "KHT-109",
+        "cadastral_owner": "Owner_H"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -1228,11 +1733,74 @@
         "cadastral_owner": "Owner_I"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-110",
+        "parcel_id": "PAR-110",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_I",
+        "purpose_of_use": "commercial",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_I",
+        "revenue_land_use": "commercial"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-110",
+        "parcel_id": "PAR-110",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_I",
+        "purpose_of_use": "commercial",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-110",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-110",
+        "parcel_id": "PAR-110",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_I",
+        "purpose_of_use": "commercial",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-110",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-110",
+        "parcel_id": "PAR-110",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_I",
+        "purpose_of_use": "commercial",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-110",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-110",
+        "parcel_id": "PAR-110",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "86500.0",
+        "owner_name": "Owner_I",
+        "purpose_of_use": "commercial",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-110",
+        "khata_no": "KHT-110",
+        "cadastral_owner": "Owner_I"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   },
   {
@@ -1361,11 +1929,74 @@
         "cadastral_owner": "Owner_J"
       }
     },
+    "department_records": {
+      "revenue_department": {
+        "record_id": "REV-111",
+        "parcel_id": "PAR-111",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_J",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-15",
+        "revenue_owner": "Owner_J",
+        "revenue_land_use": "residential"
+      },
+      "urban_local_body": {
+        "record_id": "ULB-111",
+        "parcel_id": "PAR-111",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_J",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-20",
+        "municipal_property_id": "MP-111",
+        "building_register_status": "registered"
+      },
+      "urban_development_authority": {
+        "record_id": "DA-111",
+        "parcel_id": "PAR-111",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_J",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-07-30",
+        "development_authority_id": "DEV-111",
+        "development_status": "approved"
+      },
+      "registration_stamps": {
+        "record_id": "REG-111",
+        "parcel_id": "PAR-111",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000",
+        "owner_name": "Owner_J",
+        "purpose_of_use": "residential",
+        "record_status": "registered",
+        "updated_at": "2026-08-01",
+        "registration_id": "REGDOC-111",
+        "registration_status": "registered"
+      },
+      "directorate_land_records": {
+        "record_id": "DLR-111",
+        "parcel_id": "PAR-111",
+        "tehsil": "Tehsil-Beta",
+        "land_area_sqm": "87000.0",
+        "owner_name": "Owner_J",
+        "purpose_of_use": "residential",
+        "record_status": "active",
+        "updated_at": "2026-08-10",
+        "khasra_no": "KHS-111",
+        "khata_no": "KHT-111",
+        "cadastral_owner": "Owner_J"
+      }
+    },
     "resolver_metadata": {
       "resolver_name": "SmartRuleConflictResolver",
       "is_production_ai": false,
       "version": "1.0.0-prototype",
-      "consolidated_at": "2026-09-13T11:23:58.830159+00:00"
+      "consolidated_at": "2026-09-14T19:35:32.681116+00:00"
     }
   }
 ]

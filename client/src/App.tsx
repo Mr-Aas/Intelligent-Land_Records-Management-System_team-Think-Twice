@@ -34,6 +34,22 @@ const INITIAL_OFFICIALS: Record<string, OfficialProfile> = {
     tehsil: 'Tehsil-Beta',
     district: 'Kumaon District',
   },
+  revenue_alpha: {
+    official_id: 'revenue_alpha',
+    username: 'revenue_alpha',
+    name: 'Vikram Sharma',
+    role: 'Revenue Inspector',
+    tehsil: 'Tehsil-Alpha',
+    district: 'Kumaon District',
+  },
+  tehsildar_alpha: {
+    official_id: 'tehsildar_alpha',
+    username: 'tehsildar_alpha',
+    name: 'Dr. Anita Verma',
+    role: 'Tehsildar',
+    tehsil: 'Tehsil-Alpha',
+    district: 'Kumaon District',
+  },
 };
 
 export default function App() {
@@ -125,19 +141,19 @@ export default function App() {
   }, [selectedParcelId]);
 
   // -------------------------------------------------------------------------
-  // Load Audit Trail Log (§18)
+  // Load Audit Trail Log (§18 — Tehsil-Scoped)
   // -------------------------------------------------------------------------
   const loadAuditLog = useCallback(async () => {
     setIsAuditLoading(true);
     try {
-      const data = await api.fetchAuditLog();
+      const data = await api.fetchAuditLog(currentOfficial.official_id);
       setAuditLog(data.entries || []);
     } catch (err) {
       console.error('Error loading audit trail:', err);
     } finally {
       setIsAuditLoading(false);
     }
-  }, []);
+  }, [currentOfficial.official_id]);
 
   // Initial mount load when authenticated
   useEffect(() => {
@@ -174,11 +190,11 @@ export default function App() {
   };
 
   // -------------------------------------------------------------------------
-  // Handle Human Decision Action (§8 — Mark Verified / Lock Disputed)
+  // Handle Human Decision Action (§8 — 3-Layer Workflow)
   // -------------------------------------------------------------------------
   const handleHumanAction = async (
     structureId: string,
-    action: 'mark_verified' | 'lock_disputed',
+    action: 'mark_verified' | 'lock_disputed' | 'forward_to_revenue' | 'forward_to_tehsildar' | 'tehsildar_commit',
     notes: string
   ) => {
     await api.submitHumanAction(structureId, currentOfficial.official_id, action, notes);
@@ -256,6 +272,7 @@ export default function App() {
                 onSelectStructure={(feature) => setSelectedFeature(feature)}
                 onAction={handleHumanAction}
                 currentTehsil={currentOfficial.tehsil}
+                officialRole={currentOfficial.role}
                 isLoading={isQueueLoading}
                 onCloseQueue={() => setIsQueueOpen(false)}
               />

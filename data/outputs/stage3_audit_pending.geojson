@@ -14,24 +14,24 @@
         "coordinates": [
           [
             [
-              76.5231716781044,
-              0.0011725381022297662
+              77.7231716781044,
+              28.98117253810222
             ],
             [
-              76.52478432576724,
-              0.0011725407031902904
+              77.72478432576725,
+              28.981172540703188
             ],
             [
-              76.5247843223728,
-              0.002525472283777711
+              77.7247843223728,
+              28.982525472283772
             ],
             [
-              76.52317167470875,
-              0.002525466681708887
+              77.72317167470875,
+              28.982525466681707
             ],
             [
-              76.5231716781044,
-              0.0011725381022297662
+              77.7231716781044,
+              28.98117253810222
             ]
           ]
         ]
@@ -60,9 +60,9 @@
         "related_parcel_ids": [
           "PAR-106"
         ],
-        "overflow_measure": 15.0,
+        "overflow_measure": 13.1082,
         "configured_threshold": 10.0,
-        "reason": "Overflow on parcel PAR-105 and neighboring parcel(s) PAR-106 exceeds threshold (10.00 m) at 15.00 m, but remains below 2x threshold (20.00 m).",
+        "reason": "Overflow on parcel PAR-105 and neighboring parcel(s) PAR-106 exceeds threshold (10.00 m) at 13.11 m, but remains below 2x threshold (20.00 m).",
         "municipality_reference": "MUN-BLD-005",
         "provenance": "geoai_pipeline",
         "cadastral_record": {

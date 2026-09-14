@@ -56,7 +56,7 @@ export async function fetchVerificationQueue(
 export async function submitHumanAction(
   structureId: string,
   officialId: string,
-  action: 'mark_verified' | 'lock_disputed',
+  action: 'mark_verified' | 'lock_disputed' | 'forward_to_revenue' | 'forward_to_tehsildar' | 'tehsildar_commit',
   notes = ''
 ): Promise<{
   status: string;
@@ -81,12 +81,13 @@ export async function submitHumanAction(
   return res.json();
 }
 
-export async function fetchAuditLog(): Promise<{
+export async function fetchAuditLog(officialId?: string): Promise<{
   status: string;
   count: number;
   entries: AuditLogEntry[];
 }> {
-  const res = await fetch(`${API_BASE}/human-verification/audit-log`);
+  const query = officialId ? `?official_id=${encodeURIComponent(officialId)}` : '';
+  const res = await fetch(`${API_BASE}/human-verification/audit-log${query}`);
   if (!res.ok) {
     throw new Error('Failed to fetch audit log');
   }

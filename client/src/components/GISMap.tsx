@@ -57,8 +57,8 @@ export const GISMap: React.FC<GISMapProps> = ({
   const [showStructures, setShowStructures] = useState(true);
   const [layerPanelOpen, setLayerPanelOpen] = useState(false);
 
-  // Synthetic dataset center coordinates (around [0.001, 76.51] WGS84)
-  const defaultCenter: [number, number] = [0.001, 76.513];
+  // Synthetic dataset center coordinates (Meerut region WGS84: 28.98586, 77.71663)
+  const defaultCenter: [number, number] = [28.98586, 77.71663];
 
   // Cadastral styling
   const cadastralStyle = (feature: any) => {
@@ -89,17 +89,23 @@ export const GISMap: React.FC<GISMapProps> = ({
     const isSelected =
       selectedFeature?.properties?.structure_id === props.structure_id;
 
-    let color = '#29cc39'; // verified green
+    let color = '#ec4899'; // verified pink (#ec4899 border)
     if (props.status === 'audit_pending') {
       color = '#d97706'; // amber
     } else if (props.status === 'disputed') {
       color = '#dc2626'; // red
     } else if (props.status === 'locked_disputed') {
       color = '#7c3aed'; // purple
+    } else if (props.status === 'forwarded_to_revenue') {
+      color = '#3b82f6'; // blue
+    } else if (props.status === 'forwarded_to_tehsildar') {
+      color = '#06b6d4'; // cyan
+    } else if (props.status === 'tehsildar_verified') {
+      color = '#10b981'; // emerald green
     }
 
     return {
-      color: isSelected ? '#22a229' : color,
+      color: isSelected ? '#be185d' : color,
       weight: isSelected ? 4 : 2.5,
       opacity: 1.0,
       fillColor: color,
@@ -255,8 +261,8 @@ export const GISMap: React.FC<GISMapProps> = ({
             <div className="border-t border-[#e0e0d6] pt-2 space-y-1 text-[11px] text-slate-600">
               <div className="font-bold text-slate-800 mb-1">Status Legend (Outlines)</div>
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#29cc39]"></span>
-                <span>Verified (GeoAI / Lekhpal)</span>
+                <span className="w-3 h-3 rounded-full bg-[#ec4899]"></span>
+                <span>Verified Structure (#ec4899 Pink)</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-amber-500"></span>
@@ -265,6 +271,10 @@ export const GISMap: React.FC<GISMapProps> = ({
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-red-600"></span>
                 <span>Disputed (&gt;20m / Multi-parcel)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <span>Tehsildar DB Verified</span>
               </div>
             </div>
           </div>

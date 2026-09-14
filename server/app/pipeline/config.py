@@ -10,6 +10,13 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+try:
+    import rasterio.env
+    os.environ["PROJ_LIB"] = rasterio.env.default_data_dir
+except Exception:
+    if "PROJ_LIB" in os.environ:
+        del os.environ["PROJ_LIB"]
+
 load_dotenv()
 
 # ---------------------------------------------------------------------------
