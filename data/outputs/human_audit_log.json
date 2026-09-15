@@ -1,0 +1,38 @@
+[
+  {
+    "event_id": "c77767a1-f09d-4689-8026-159347078fc6",
+    "action": "mark_verified",
+    "structure_id": "STR-005",
+    "official_id": "official_beta",
+    "official_name": "Suresh Singh",
+    "tehsil": "Tehsil-Beta",
+    "previous_status": "audit_pending",
+    "new_status": "verified",
+    "timestamp": "2026-09-12T11:25:37.112743+00:00",
+    "notes": "Boundary exceedance within permissible tolerance for Tehsil-Beta."
+  },
+  {
+    "event_id": "4786f719-da20-41da-b45f-8a0336b86f5b",
+    "action": "lock_disputed",
+    "structure_id": "STR-006",
+    "official_id": "official_beta",
+    "official_name": "Suresh Singh",
+    "tehsil": "Tehsil-Beta",
+    "previous_status": "disputed",
+    "new_status": "locked_disputed",
+    "timestamp": "2026-09-12T11:25:37.123448+00:00",
+    "notes": "Severe encroachment confirmed by Lekhpal."
+  },
+  {
+    "event_id": "c18b75bf-650f-46ec-9146-1becc88a52da",
+    "action": "lock_disputed",
+    "structure_id": "STR-007",
+    "official_id": "official_alpha",
+    "official_name": "Ramesh Kumar",
+    "tehsil": "Tehsil-Alpha",
+    "previous_status": "disputed",
+    "new_status": "locked_disputed",
+    "timestamp": "2026-09-13T06:48:44.177000+00:00",
+    "notes": ""
+  }
+]

@@ -73,23 +73,23 @@ class TestStage3(unittest.TestCase):
         # STR-002, STR-003, STR-004, STR-008, STR-009, STR-010 -> verified
         self.assertEqual(v_ids, {"STR-002", "STR-003", "STR-004", "STR-008", "STR-009", "STR-010"})
 
-        # STR-004 has 5m overflow (< 10m threshold)
+        # STR-004 has ~4.37m overflow (< 10m threshold)
         str4 = next(r for r in verified if r.structure_id == "STR-004")
-        self.assertAlmostEqual(str4.overflow_measure, 5.0, places=1)
+        self.assertAlmostEqual(str4.overflow_measure, 4.37, places=1)
         self.assertEqual(str4.parcel_id, "PAR-104")
         self.assertIn("PAR-105", str4.related_parcel_ids)
         self.assertEqual(str4.verification_method, "geoai")
 
-        # STR-005 has 15m overflow (10m <= 15m < 20m) -> audit_pending
+        # STR-005 has ~13.1m overflow (10m <= 13.1m < 20m) -> audit_pending
         self.assertEqual(a_ids, {"STR-005"})
         str5 = audit_pending[0]
-        self.assertAlmostEqual(str5.overflow_measure, 15.0, places=1)
+        self.assertAlmostEqual(str5.overflow_measure, 13.1, places=1)
         self.assertEqual(str5.status, "audit_pending")
 
-        # STR-006 (30m overflow) and STR-007 (split across two parcels) -> disputed
+        # STR-006 (26.2m overflow) and STR-007 (split across two parcels) -> disputed
         self.assertEqual(d_ids, {"STR-006", "STR-007"})
         str6 = next(r for r in disputed if r.structure_id == "STR-006")
-        self.assertAlmostEqual(str6.overflow_measure, 30.0, places=1)
+        self.assertAlmostEqual(str6.overflow_measure, 26.2, places=1)
         self.assertEqual(str6.status, "disputed")
 
         str7 = next(r for r in disputed if r.structure_id == "STR-007")

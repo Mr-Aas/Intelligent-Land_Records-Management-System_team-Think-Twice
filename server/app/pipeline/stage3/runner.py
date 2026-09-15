@@ -25,19 +25,31 @@ from app.pipeline.stage3.validator import (
     validate_cadastral_dataset,
 )
 
+from pyproj import Transformer
+from shapely.geometry import mapping, shape
+from shapely.ops import transform
+
 logger = logging.getLogger(__name__)
 
 
 def export_cadastral_records_geojson(
     records: list[CadastralValidatedRecord],
     output_path: str | Path,
-    crs_name: str = f"EPSG:{config.DEFAULT_CRS_EPSG}",
+    crs_name: str = "urn:ogc:def:crs:OGC:1.3:CRS84",
 ) -> Path:
-    """Exports a list of CadastralValidatedRecord instances to GeoJSON."""
+    """Exports a list of CadastralValidatedRecord instances to WGS84 GeoJSON."""
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
 
-    features = [r.to_geojson_feature() for r in records]
+    transformer = Transformer.from_crs(f"EPSG:{config.DEFAULT_CRS_EPSG}", "EPSG:4326", always_xy=True)
+    features = []
+    for r in records:
+        feat = r.to_geojson_feature()
+        geom = shape(feat["geometry"])
+        wgs_geom = transform(transformer.transform, geom)
+        feat["geometry"] = mapping(wgs_geom)
+        features.append(feat)
+
     feature_collection = {
         "type": "FeatureCollection",
         "crs": {
@@ -52,6 +64,7 @@ def export_cadastral_records_geojson(
 
     logger.info("Exported %d records to %s", len(features), out)
     return out
+
 
 
 def run_stage3(
@@ -87,9 +100,9 @@ def run_stage3(
     )
 
     # 3. Export separate GeoJSON files for each branch
-    v_path = export_cadastral_records_geojson(verified, verified_output_path, f"EPSG:{target_epsg}")
-    a_path = export_cadastral_records_geojson(audit_pending, audit_pending_output_path, f"EPSG:{target_epsg}")
-    d_path = export_cadastral_records_geojson(disputed, disputed_output_path, f"EPSG:{target_epsg}")
+    v_path = export_cadastral_records_geojson(verified, verified_output_path, "EPSG:4326")
+    a_path = export_cadastral_records_geojson(audit_pending, audit_pending_output_path, "EPSG:4326")
+    d_path = export_cadastral_records_geojson(disputed, disputed_output_path, "EPSG:4326")
 
     logger.info("Stage 3 Cadastral Validation completed successfully.")
     return v_path, a_path, d_path, verified, audit_pending, disputed

@@ -4,19 +4,33 @@ services:
   db:
     image: postgis/postgis:15-3.3
     environment:
-      POSTGRES_USER: sih_user
-      POSTGRES_PASSWORD: sih_password
-      POSTGRES_DB: land_records
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: land_geospatial_db
     ports:
       - "5432:5432"
     volumes:
       - postgis_data:/var/lib/postgresql/data
     restart: unless-stopped
 
-  # Airflow services to be configured fully in Phase 8
-  # airflow-webserver:
-  #   image: apache/airflow:2.7.1
-  #   ...
+  geoserver:
+    image: kartoza/geoserver:2.24.0
+    ports:
+      - "8080:8080"
+    environment:
+      - GEOSERVER_ADMIN_USER=admin
+      - GEOSERVER_ADMIN_PASSWORD=geoserver
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=land_geospatial_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres_password
+      - POSTGRES_HOST=db
+    depends_on:
+      - db
+    volumes:
+      - geoserver_data:/opt/geoserver/data_dir
+    restart: unless-stopped
 
 volumes:
   postgis_data:
+  geoserver_data:

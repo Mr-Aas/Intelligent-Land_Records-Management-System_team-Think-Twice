@@ -3,7 +3,7 @@
   "crs": {
     "type": "name",
     "properties": {
-      "name": "EPSG:32644"
+      "name": "EPSG:4326"
     }
   },
   "features": [
@@ -14,24 +14,24 @@
         "coordinates": [
           [
             [
-              1650.0000000003492,
-              150.0
+              77.72603860944653,
+              28.98135293391405
             ],
             [
-              1840.0000000000582,
-              149.99999999999997
+              77.7277408554618,
+              28.981352937079848
             ],
             [
-              1839.9999999995925,
-              300.00000000000006
+              77.72774085173864,
+              28.982705874159677
             ],
             [
-              1650.0000000005239,
-              300.0
+              77.72603860572198,
+              28.9827058678281
             ],
             [
-              1650.0000000003492,
-              150.0
+              77.72603860944653,
+              28.98135293391405
             ]
           ]
         ]
@@ -58,9 +58,9 @@
         },
         "parcel_id": "PAR-106",
         "related_parcel_ids": [],
-        "overflow_measure": 30.0,
+        "overflow_measure": 26.2164,
         "configured_threshold": 10.0,
-        "reason": "Major overflow on parcel PAR-106 exceeds 2x threshold (20.00 m) with measured exceedance of 30.00 m.",
+        "reason": "Major overflow on parcel PAR-106 exceeds 2x threshold (20.00 m) with measured exceedance of 26.22 m.",
         "municipality_reference": "MUN-BLD-006",
         "provenance": "geoai_pipeline",
         "cadastral_record": {
@@ -84,24 +84,24 @@
         "coordinates": [
           [
             [
-              250.00000000116415,
-              499.9999999999999
+              77.71349585440926,
+              28.98450970183431
             ],
             [
-              430.0000000005821,
-              499.99999999999983
+              77.71510848059036,
+              28.98450971185945
             ],
             [
-              430.0000000007567,
-              649.9999999999999
+              77.71510847104895,
+              28.985862625417177
             ],
             [
-              250.00000000058208,
-              650.0
+              77.71349584486444,
+              28.98586261238449
             ],
             [
-              250.00000000116415,
-              499.9999999999999
+              77.71349585440926,
+              28.98450970183431
             ]
           ]
         ]
@@ -126,21 +126,21 @@
           "source_authority": "Synthetic Meerut Nagar Nigam",
           "record_status": "synthetic"
         },
-        "parcel_id": "PAR-107",
+        "parcel_id": "PAR-108",
         "related_parcel_ids": [
-          "PAR-108"
+          "PAR-107"
         ],
-        "overflow_measure": 90.0,
+        "overflow_measure": 78.6459,
         "configured_threshold": 10.0,
-        "reason": "Major overflow on parcel PAR-107 and neighboring parcel(s) PAR-108 exceeds 2x threshold (20.00 m) with measured exceedance of 90.00 m.",
+        "reason": "Major overflow on parcel PAR-108 and neighboring parcel(s) PAR-107 exceeds 2x threshold (20.00 m) with measured exceedance of 78.65 m.",
         "municipality_reference": "MUN-BLD-007",
         "provenance": "geoai_pipeline",
         "cadastral_record": {
-          "parcel_id": "PAR-107",
-          "khasra_no": "KHS-107",
-          "khata_no": "KHT-107",
+          "parcel_id": "PAR-108",
+          "khasra_no": "KHS-108",
+          "khata_no": "KHT-108",
           "land_use": "residential",
-          "record_area_sqm": 69600.0,
+          "record_area_sqm": 46400.0,
           "tehsil": "Tehsil-Alpha",
           "district": "Synthetic-District",
           "source_department": "Directorate of Land Records / Cadastral System",

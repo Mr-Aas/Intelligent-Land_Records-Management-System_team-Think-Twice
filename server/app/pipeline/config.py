@@ -6,7 +6,26 @@ synthetic data is ready.  Every configurable value lives here so the rest
 of the codebase never contains unexplained literals.
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+try:
+    import rasterio.env
+    os.environ["PROJ_LIB"] = rasterio.env.default_data_dir
+except Exception:
+    if "PROJ_LIB" in os.environ:
+        del os.environ["PROJ_LIB"]
+
+load_dotenv()
+
+# ---------------------------------------------------------------------------
+# Database Configuration (§12 — PostgreSQL + PostGIS)
+# ---------------------------------------------------------------------------
+print(os.getenv("DATABASE_URL"))
+DATABASE_URL: str = os.getenv(
+    "DATABASE_URL"
+)
 
 # ---------------------------------------------------------------------------
 # Paths  (PLACEHOLDERS — update when synthetic data is available)
@@ -35,6 +54,15 @@ STAGE3_VERIFIED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "sta
 STAGE3_AUDIT_PENDING_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage3_audit_pending.geojson")
 STAGE3_DISPUTED_OUTPUT_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage3_disputed.geojson")
 
+# Human Verification workflow paths
+HUMAN_VERIFICATION_RECORDS_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "human_verification_records.geojson")
+HUMAN_AUDIT_LOG_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "human_audit_log.json")
+
+# Stage 4 — Multi-Department Consolidated Single Source of Truth paths
+STAGE4_CONSOLIDATED_JSON_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage4_consolidated_parcels.json")
+STAGE4_CONSOLIDATED_GEOJSON_PATH: str = str(_PROJECT_ROOT / "data" / "outputs" / "stage4_consolidated_parcels.geojson")
+
+
 # ---------------------------------------------------------------------------
 # Stage 1 — Raster tiling
 # ---------------------------------------------------------------------------
@@ -50,7 +78,7 @@ DEFAULT_CRS_EPSG: int = 32644
 # ---------------------------------------------------------------------------
 # Stage 1 — Inference adapter
 # ---------------------------------------------------------------------------
-USE_MOCK_INFERENCE: bool = False  # False → real YOLOv11-seg adapter
+USE_MOCK_INFERENCE: bool = False  # False → full synthetic detector producing STR-001 to STR-010 fixture
 MOCK_RANDOM_SEED: int = 42       # deterministic synthetic detections
 
 # Deduplication: IoU threshold for merging detections from overlapping tiles

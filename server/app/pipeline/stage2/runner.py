@@ -23,19 +23,31 @@ from app.pipeline.stage2.matcher import (
     load_layer_in_crs,
 )
 
+from pyproj import Transformer
+from shapely.geometry import mapping, shape
+from shapely.ops import transform
+
 logger = logging.getLogger(__name__)
 
 
 def export_structures_geojson(
     structures: list[MunicipalMatchedStructure],
     output_path: str | Path,
-    crs_name: str = f"EPSG:{config.DEFAULT_CRS_EPSG}",
+    crs_name: str = "urn:ogc:def:crs:OGC:1.3:CRS84",
 ) -> Path:
-    """Exports a list of MunicipalMatchedStructure instances to GeoJSON."""
+    """Exports a list of MunicipalMatchedStructure instances to WGS84 GeoJSON."""
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
 
-    features = [s.to_geojson_feature() for s in structures]
+    transformer = Transformer.from_crs(f"EPSG:{config.DEFAULT_CRS_EPSG}", "EPSG:4326", always_xy=True)
+    features = []
+    for s in structures:
+        feat = s.to_geojson_feature()
+        geom = shape(feat["geometry"])
+        wgs_geom = transform(transformer.transform, geom)
+        feat["geometry"] = mapping(wgs_geom)
+        features.append(feat)
+
     feature_collection = {
         "type": "FeatureCollection",
         "crs": {
@@ -50,6 +62,7 @@ def export_structures_geojson(
 
     logger.info("Exported %d records to %s", len(features), out)
     return out
+
 
 
 def run_stage2(
@@ -79,8 +92,8 @@ def run_stage2(
     matched, unregistered = evaluate_municipal_matching(ai_gdf, mun_gdf)
 
     # 3. Export outputs
-    matched_path = export_structures_geojson(matched, matched_output_path, f"EPSG:{target_epsg}")
-    unregistered_path = export_structures_geojson(unregistered, unregistered_output_path, f"EPSG:{target_epsg}")
+    matched_path = export_structures_geojson(matched, matched_output_path, "EPSG:4326")
+    unregistered_path = export_structures_geojson(unregistered, unregistered_output_path, "EPSG:4326")
 
     logger.info("Stage 2 Municipal Matching completed successfully.")
     return matched_path, unregistered_path, matched, unregistered

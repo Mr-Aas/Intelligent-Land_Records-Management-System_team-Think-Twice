@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.endpoints import router as api_router
+
 app = FastAPI(
     title="Urban Land Record Management API",
     description="AI-Enabled Geospatial Integration Platform",
@@ -16,6 +18,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(api_router)
+
 @app.get("/")
 def read_root():
     return {"status": "ok", "message": "Geospatial Integration Platform API is running"}
+
