@@ -5,9 +5,10 @@ import {
   Building,
   RefreshCw,
 } from 'lucide-react';
-import type { ConsolidatedParcel } from '../types';
+import type { ConsolidatedParcel,OfficialProfile } from '../types';
 
 interface ConsolidatedParcelsViewProps {
+  currentOfficial:OfficialProfile;
   parcels: ConsolidatedParcel[];
   selectedParcelId: string | null;
   onSelectParcel: (parcelId: string) => void;
@@ -16,6 +17,7 @@ interface ConsolidatedParcelsViewProps {
 }
 
 export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = ({
+  currentOfficial,
   parcels,
   selectedParcelId,
   onSelectParcel,
@@ -24,8 +26,14 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterConflictOnly, setFilterConflictOnly] = useState(false);
+ 
 
-  const filteredParcels = parcels.filter((p) => {
+
+  const official_related_parcels = parcels.filter((p) => p.tehsil == currentOfficial.tehsil);
+  console.log(currentOfficial)
+  console.log(parcels[8])
+
+  const filteredParcels = official_related_parcels.filter((p) => {
     const matchesSearch =
       p.parcel_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.khasra_no.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -38,12 +46,13 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
 
     return matchesSearch && matchesConflict;
   });
+  
 
   const activeParcel =
     parcels.find((p) => p.parcel_id === selectedParcelId) || parcels[0] || null;
 
   return (
-    <div className="flex-1 flex h-full bg-[#f4f4ef] overflow-hidden text-slate-800">
+    <div className="flex-1 bg-red-100 flex h-full  overflow-hidden text-slate-800">
       {/* Left Column: Parcel Registry List */}
       <div className="w-84 border-r border-[#d2d2c8] bg-[#fafaf7] flex flex-col h-full shrink-0 shadow-sm">
         <div className="p-3.5 border-b border-[#d2d2c8] bg-[#efefea] space-y-2.5">
@@ -170,7 +179,7 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
             <div className="bg-[#fafaf7] border border-[#d2d2c8] rounded-2xl p-4 shadow-sm">
               <span className="text-slate-400 text-[11px] block font-semibold">Conflict Resolution Status</span>
               <span className="text-sm font-black text-slate-900 mt-1 block">
-                {activeParcel.conflict_summary?.has_conflicts ? 'Rule Resolved' : 'No Conflicts'}
+                {activeParcel.conflict_summary?.has_conflicts ? 'conflicted' : 'No Conflicts'}
               </span>
             </div>
           </div>
@@ -198,7 +207,7 @@ export const ConsolidatedParcelsView: React.FC<ConsolidatedParcelsViewProps> = (
                     <tr key={dept} className="hover:bg-white transition">
                       <td className="p-3 font-bold uppercase text-slate-800">{dept.replace(/_/g, ' ')}</td>
                       <td className="p-3 font-semibold">{rec?.owner_name || rec?.cadastral_owner || rec?.revenue_owner || rec?.owner || 'N/A'}</td>
-                      <td className="p-3 font-semibold">{rec?.area_sqm || rec?.registered_area_sqm || rec?.record_area_sqm || 'N/A'} {rec?.area_sqm || rec?.registered_area_sqm || rec?.record_area_sqm ? 'sqm' : ''}</td>
+                      <td className="p-3 font-semibold">{rec?.land_area_sqm || rec?.registered_area_sqm || rec?.record_area_sqm || 'N/A'} {rec?.area_sqm || rec?.registered_area_sqm || rec?.record_area_sqm ? 'sqm' : ''}</td>
                       <td className="p-3 capitalize">{rec?.land_use || rec?.purpose_of_use || rec?.category || 'N/A'}</td>
                       <td className="p-3">
                         <span className="text-[10px] bg-[#29cc39]/15 text-[#1b7a21] font-bold px-2 py-0.5 rounded">

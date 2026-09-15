@@ -45,6 +45,24 @@ const SYNTHETIC_OFFICIALS: Record<string, OfficialProfile & { defaultPass: strin
     district: 'Kumaon District',
     defaultPass: 'tehsildar123',
   },
+  revenue_beta: {
+    official_id: 'revenue_beta',
+    username: 'revenue_beta',
+    name: 'mahesh Sharma',
+    role: 'Revenue Inspector',
+    tehsil: 'Tehsil-Beta',
+    district: 'Kumaon District',
+    defaultPass: 'revenue123',
+  },
+  tehsildar_beta: {
+    official_id: 'tehsildar_beta',
+    username: 'tehsildar_beta',
+    name: 'Mr Avinash gupta',
+    role: 'Tehsildar',
+    tehsil: 'Tehsil-Beta',
+    district: 'Kumaon District',
+    defaultPass: 'tehsildar123',
+  },
 };
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigateToSignup }) => {
@@ -164,6 +182,27 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigateToSignu
                 Revenue Inspector
               </span>
             </button>
+            <button
+              type="button"
+              onClick={() => handleQuickSelect('revenue_beta')}
+              className={`p-2.5 rounded-xl border text-left transition-all flex flex-col justify-between ${
+                selectedOfficialId === 'revenue_beta'
+                  ? 'border-[#29cc39] bg-[#29cc39]/10 shadow-sm ring-1 ring-[#29cc39]'
+                  : 'border-[#e0e0d6] bg-white hover:border-slate-300'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold text-slate-800">mahesh Sharma</span>
+                {selectedOfficialId === 'revenue_beta' && (
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#29cc39]" />
+                )}
+              </div>
+              <span className="text-[9px] text-blue-700 font-medium mt-1 bg-blue-50 px-1 rounded border border-blue-200/60 w-max">
+                Revenue Inspector
+              </span>
+            </button>
+
+            
 
             <button
               type="button"
@@ -174,9 +213,30 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigateToSignu
                   : 'border-[#e0e0d6] bg-white hover:border-slate-300'
               }`}
             >
+              
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-slate-800">Anita Verma</span>
+                <span className="text-[11px] font-bold text-slate-800">mahesh Sharma</span>
                 {selectedOfficialId === 'tehsildar_alpha' && (
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#29cc39]" />
+                )}
+              </div>
+              <span className="text-[9px] text-purple-700 font-medium mt-1 bg-purple-50 px-1 rounded border border-purple-200/60 w-max">
+                Tehsildar (Final DB)
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleQuickSelect('tehsildar_beta')}
+              className={`p-2.5 rounded-xl border text-left transition-all flex flex-col justify-between ${
+                selectedOfficialId === 'tehsildar_beta'
+                  ? 'border-[#29cc39] bg-[#29cc39]/10 shadow-sm ring-1 ring-[#29cc39]'
+                  : 'border-[#e0e0d6] bg-white hover:border-slate-300'
+              }`}
+            >
+              
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold text-slate-800">Mr Avinash gupta</span>
+                {selectedOfficialId === 'tehsildar_beta' && (
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#29cc39]" />
                 )}
               </div>

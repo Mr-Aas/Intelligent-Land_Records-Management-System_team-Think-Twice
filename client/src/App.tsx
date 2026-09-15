@@ -50,6 +50,22 @@ const INITIAL_OFFICIALS: Record<string, OfficialProfile> = {
     tehsil: 'Tehsil-Alpha',
     district: 'Kumaon District',
   },
+  revenue_beta: {
+    official_id: 'revenue_beta',
+    username: 'revenue_beta',
+    name: 'mahesh Sharma',
+    role: 'Revenue Inspector',
+    tehsil: 'Tehsil-Beta',
+    district: 'Kumaon District',
+  },
+  tehsildar_beta: {
+    official_id: 'tehsildar_beta',
+    username: 'tehsildar_beta',
+    name: 'Mr Avinash gupta',
+    role: 'Tehsildar',
+    tehsil: 'Tehsil-Beta',
+    district: 'Kumaon District',
+  },
 };
 
 export default function App() {
@@ -67,6 +83,7 @@ export default function App() {
     }
     return INITIAL_OFFICIALS.official_alpha;
   });
+  
 
   // Navigation & Sidebar Toggle state
   const [activeView, setActiveView] = useState<'queue' | 'parcels'>('queue');
@@ -118,6 +135,7 @@ export default function App() {
     try {
       const data = await api.fetchVerificationQueue(officialId);
       setQueue(data.features || []);
+      console.log(data.official_id,"\n",queue)
     } catch (err) {
       console.error('Error loading verification queue:', err);
     } finally {
@@ -292,6 +310,7 @@ export default function App() {
         ) : (
           /* Single Source of Truth View: Stage 4 Consolidated Parcels */
           <ConsolidatedParcelsView
+            currentOfficial={currentOfficial}
             parcels={parcels}
             selectedParcelId={selectedParcelId}
             onSelectParcel={(id) => setSelectedParcelId(id)}

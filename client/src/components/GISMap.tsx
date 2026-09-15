@@ -142,7 +142,7 @@ export const GISMap: React.FC<GISMapProps> = ({
 <TileLayer
   attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
   url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-  maxZoom={24}
+  maxZoom={100}
 />
         <MapController selectedFeature={selectedFeature} />
 
@@ -165,6 +165,7 @@ export const GISMap: React.FC<GISMapProps> = ({
 
         {/* 2. Municipal Buildings Layer */}
         {showMunicipal && municipalLayer && (
+          
           <GeoJSON
             key={`municipal-${municipalLayer.features.length}`}
             data={municipalLayer as any}

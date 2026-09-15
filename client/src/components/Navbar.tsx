@@ -195,7 +195,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
 
               {/* Quick Switch Official Dropdown */}
-              <div className="pt-2 border-t border-[#e0e0d6]">
+              {/* <div className="pt-2 border-t border-[#e0e0d6]">
                 <label className="text-[11px] font-semibold text-slate-500 block mb-1">
                   Switch Active Lekhpal Profile:
                 </label>
@@ -209,7 +209,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <option value="official_alpha">Ramesh Kumar (Tehsil-Alpha)</option>
                   <option value="official_beta">Suresh Singh (Tehsil-Beta)</option>
                 </select>
-              </div>
+              </div> */}
             </div>
 
             {/* Logout Action */}
